@@ -52,7 +52,7 @@ import net.minecraft.util.Identifier;
 import static com.oroarmor.netherite_plus.item.NetheritePlusItems.*;
 
 public class NetheritePlusMod implements ModInitializer {
-    public static final String MOD_ID = "netherite_plus";
+    public static final String MOD_ID = "npdequilt";
 //    public static final NetheritePlusConfig CONFIG = FabricConfig.create(
 //            MOD_ID,   // The family id, this should usually just be your mod ID
 //            "config",           // The id for this particular config, since your mod might have multiple
