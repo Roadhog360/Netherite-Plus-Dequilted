@@ -6,9 +6,9 @@
   "description": "",
   "authors": [],
   "contact": {
-    "repo": "https://github.com/roadhog360/npdequilt"
+    "repo": "https://github.com/Roadhog360/Netherite-Plus-Dequilted"
   },
-  "license": "All-Rights-Reserved",
+  "license": "MIT",
   "icon": "assets/netherite_plus/icon.png",
   "environment": "*",
   "entrypoints": {
