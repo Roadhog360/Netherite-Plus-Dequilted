@@ -39,13 +39,11 @@ import com.oroarmor.netherite_plus.screen.NetheriteBeaconScreenHandler;
 import com.oroarmor.netherite_plus.screen.NetheritePlusScreenHandlers;
 import com.oroarmor.netherite_plus.stat.NetheritePlusStats;
 import io.netty.buffer.ByteBuf;
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.quiltmc.loader.api.ModContainer;
-import org.quiltmc.loader.api.config.v2.QuiltConfig;
-import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
-import org.quiltmc.qsl.networking.api.PacketByteBufs;
-import org.quiltmc.qsl.networking.api.ServerPlayNetworking;
 
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -55,16 +53,16 @@ import static com.oroarmor.netherite_plus.item.NetheritePlusItems.*;
 
 public class NetheritePlusMod implements ModInitializer {
     public static final String MOD_ID = "netherite_plus";
-    public static final NetheritePlusConfig CONFIG = QuiltConfig.create(
-            MOD_ID,   // The family id, this should usually just be your mod ID
-            "config",           // The id for this particular config, since your mod might have multiple
-            NetheritePlusConfig.class      // The config class you created earlier
-    );
+//    public static final NetheritePlusConfig CONFIG = FabricConfig.create(
+//            MOD_ID,   // The family id, this should usually just be your mod ID
+//            "config",           // The id for this particular config, since your mod might have multiple
+//            NetheritePlusConfig.class      // The config class you created earlier
+//    );
 
     public static final Logger LOGGER = LogManager.getLogger("Netherite Plus");
     public static final Collection<ServerPlayerEntity> CONNECTED_CLIENTS = new ArrayList<>();
 
-    public void onInitialize(ModContainer mod) {
+    public void onInitialize() {
         NetheritePlusItems.init();
         NetheritePlusScreenHandlers.init();
         NetheritePlusRecipeSerializer.init();

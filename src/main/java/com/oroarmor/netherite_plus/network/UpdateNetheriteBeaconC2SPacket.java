@@ -29,12 +29,13 @@ import java.util.Optional;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.packet.c2s.play.BeaconUpdateC2SPacket;
+import net.minecraft.network.packet.c2s.play.UpdateBeaconC2SPacket;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 
 import static com.oroarmor.netherite_plus.NetheritePlusMod.id;
 
-public class UpdateNetheriteBeaconC2SPacket extends BeaconUpdateC2SPacket {
+public class UpdateNetheriteBeaconC2SPacket extends UpdateBeaconC2SPacket {
 
     public static final Identifier ID = id("netherite_beacon_update_packet");
 

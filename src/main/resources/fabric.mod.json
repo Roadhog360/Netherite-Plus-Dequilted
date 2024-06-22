@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "npdequilt",
+  "version": "${version}",
+  "name": "Netherite Plus Dequilted",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/roadhog360/npdequilt"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/netherite_plus/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.oroarmor.netherite_plus.NetheritePlusMod"
+    ],
+    "client": [
+      "com.oroarmor.netherite_plus.client.NetheritePlusClientMod"
+    ]
+  },
+  "mixins": [
+    "netherite_plus.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
