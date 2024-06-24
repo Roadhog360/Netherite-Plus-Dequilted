@@ -24,22 +24,23 @@
 
 package com.oroarmor.netherite_plus.item;
 
-import com.oroarmor.netherite_plus.NetheritePlusMod;
-import org.quiltmc.qsl.item.extensions.api.crossbow.CrossbowShotProjectileEvents;
-import org.quiltmc.qsl.item.extensions.api.crossbow.ProjectileModifyingCrossbowItem;
-
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
+import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
 
-public class NetheriteCrossbowItem extends ProjectileModifyingCrossbowItem {
+//Originally was extending ProjectileModifyingCrossbowItem
+public class NetheriteCrossbowItem extends CrossbowItem {
     public NetheriteCrossbowItem(Settings settings) {
         super(settings);
-        CrossbowShotProjectileEvents.CROSSBOW_MODIFY_SHOT_PROJECTILE.register(this);
     }
 
     @Override
-    public void onProjectileShot(ItemStack crossbowStack, ItemStack arrowStack, LivingEntity user, PersistentProjectileEntity projectile) {
-        projectile.setDamage(projectile.getDamage() * NetheritePlusMod.CONFIG.damage.crossbow_damage_multiplier.value() + NetheritePlusMod.CONFIG.damage.crossbow_damage_addition.value());
+    public boolean isUsedOnRelease(ItemStack stack) {
+        return stack.getItem() == NetheritePlusItems.NETHERITE_CROSSBOW;
     }
+
+//    @Override
+    //Not sure what to do here
+//    public void onProjectileShot(ItemStack crossbowStack, ItemStack arrowStack, LivingEntity user, PersistentProjectileEntity projectile) {
+//        projectile.setDamage(projectile.getDamage() * NetheritePlusMod.CONFIG.damage.crossbow_damage_multiplier.value() + NetheritePlusMod.CONFIG.damage.crossbow_damage_addition.value());
+//    }
 }

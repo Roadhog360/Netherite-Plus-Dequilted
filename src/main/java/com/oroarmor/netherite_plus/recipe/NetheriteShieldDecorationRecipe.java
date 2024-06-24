@@ -30,15 +30,15 @@ import net.minecraft.inventory.RecipeInputInventory;
 import net.minecraft.item.BannerItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.recipe.CraftingCategory;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.SpecialCraftingRecipe;
+import net.minecraft.recipe.book.CraftingRecipeCategory;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
 public class NetheriteShieldDecorationRecipe extends SpecialCraftingRecipe {
-    public NetheriteShieldDecorationRecipe(Identifier identifier, CraftingCategory category) {
+    public NetheriteShieldDecorationRecipe(Identifier identifier, CraftingRecipeCategory category) {
         super(identifier, category);
     }
 

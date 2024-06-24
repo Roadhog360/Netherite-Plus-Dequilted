@@ -35,6 +35,7 @@ repositories {
         name = "Modrinth"
         url = "https://api.modrinth.com/maven"
     }
+	maven { url 'https://maven.quiltmc.org/repository/release' }
 }
 
 dependencies {
@@ -49,6 +50,14 @@ dependencies {
     modImplementation "com.oroarmor:multi-item-lib:1.6.2"
     modCompileOnly('com.github.CrimsonDawn45:Fabric-Shield-Lib:main-SNAPSHOT')
     modRuntimeOnly("com.terraformersmc:modmenu:7.2.1")
+
+	modImplementation libs.quilt.config
+	modImplementation "com.electronwill.night-config:core:${libs.versions.night.config.get()}"
+	modImplementation "com.electronwill.night-config:toml:${libs.versions.night.config.get()}"
+
+	include libs.quilt.config
+	include "com.electronwill.night-config:core:${libs.versions.night.config.get()}"
+	include "com.electronwill.night-config:toml:${libs.versions.night.config.get()}"
 }
 
 processResources {

@@ -29,6 +29,7 @@ import java.util.Collection;
 
 import com.oroarmor.multiitemlib.api.UniqueItemRegistry;
 import com.oroarmor.netherite_plus.advancement.criterion.NetheritePlusCriteria;
+import com.oroarmor.netherite_plus.config.FabricatedQuiltConfig;
 import com.oroarmor.netherite_plus.config.NetheritePlusConfig;
 import com.oroarmor.netherite_plus.entity.effect.NetheritePlusStatusEffects;
 import com.oroarmor.netherite_plus.item.NetheritePlusItems;
@@ -53,11 +54,11 @@ import static com.oroarmor.netherite_plus.item.NetheritePlusItems.*;
 
 public class NetheritePlusMod implements ModInitializer {
     public static final String MOD_ID = "npdequilt";
-//    public static final NetheritePlusConfig CONFIG = FabricConfig.create(
-//            MOD_ID,   // The family id, this should usually just be your mod ID
-//            "config",           // The id for this particular config, since your mod might have multiple
-//            NetheritePlusConfig.class      // The config class you created earlier
-//    );
+    public static final NetheritePlusConfig CONFIG = FabricatedQuiltConfig.create(
+            MOD_ID,   // The family id, this should usually just be your mod ID
+            "config",           // The id for this particular config, since your mod might have multiple
+            NetheritePlusConfig.class      // The config class you created earlier
+    );
 
     public static final Logger LOGGER = LogManager.getLogger("Netherite Plus");
     public static final Collection<ServerPlayerEntity> CONNECTED_CLIENTS = new ArrayList<>();
@@ -93,7 +94,7 @@ public class NetheritePlusMod implements ModInitializer {
 
     public static void registerItemsWithMultiItemLib() {
         if (CONFIG.enabled.shields.value()) {
-//            UniqueItemRegistry.SHIELD.addItemToRegistry(NETHERITE_SHIELD);
+            UniqueItemRegistry.SHIELD.addItemToRegistry(NETHERITE_SHIELD);
         }
         if (CONFIG.enabled.fishing_rod.value()) {
             UniqueItemRegistry.FISHING_ROD.addItemToRegistry(NETHERITE_FISHING_ROD);

@@ -27,6 +27,7 @@ package com.oroarmor.netherite_plus.client.gui.screen;
 import com.oroarmor.netherite_plus.screen.NetheriteAnvilScreenHandler;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screen.ingame.ForgingScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
@@ -35,6 +36,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.c2s.play.ItemRenameC2SPacket;
+import net.minecraft.network.packet.c2s.play.RenameItemC2SPacket;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
@@ -89,7 +91,7 @@ public class NetheriteAnvilScreen extends ForgingScreen<NetheriteAnvilScreenHand
 
     }
 
-    protected void drawBackground(GuiGraphics graphics, float delta, int mouseX, int mouseY) {
+    protected void drawBackground(DrawContext graphics, float delta, int mouseX, int mouseY) {
         super.drawBackground(graphics, delta, mouseX, mouseY);
         graphics.drawTexture(TEXTURE, this.x + 59, this.y + 20, 0, this.backgroundHeight + (this.handler.getSlot(0).hasStack() ? 0 : 16), 110, 16);
     }
@@ -111,7 +113,7 @@ public class NetheriteAnvilScreen extends ForgingScreen<NetheriteAnvilScreenHand
             }
 
             this.handler.setNewItemName(s);
-            this.client.player.networkHandler.sendPacket(new ItemRenameC2SPacket(s));
+            this.client.player.networkHandler.sendPacket(new RenameItemC2SPacket(s));
         }
     }
 
@@ -120,13 +122,13 @@ public class NetheriteAnvilScreen extends ForgingScreen<NetheriteAnvilScreenHand
         if (slotId == 0) {
             nameField.setText(stack.isEmpty() ? "" : stack.getName().getString());
             nameField.setEditable(!stack.isEmpty());
-            setFocusedChild(nameField);
+            setFocused(nameField);
         }
 
     }
 
     @Override
-    public void renderForeground(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+    public void renderForeground(DrawContext graphics, int mouseX, int mouseY, float delta) {
         this.nameField.render(graphics, mouseX, mouseY, delta);
     }
 
@@ -138,7 +140,7 @@ public class NetheriteAnvilScreen extends ForgingScreen<NetheriteAnvilScreenHand
     }
 
     @Override
-    protected void renderIcon(GuiGraphics graphics, int i, int j) {
+    protected void renderBackgroundTexture(DrawContext graphics, int i, int j) {
         if ((this.handler.getSlot(0).hasStack() || this.handler.getSlot(1).hasStack())
             && !this.handler.getSlot(this.handler.getResultSlotIndex()).hasStack()) {
             graphics.drawTexture(TEXTURE, i + 99, j + 45, this.backgroundWidth, 0, 28, 21);

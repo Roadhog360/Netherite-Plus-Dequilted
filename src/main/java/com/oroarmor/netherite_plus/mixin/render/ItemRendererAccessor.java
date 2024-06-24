@@ -24,7 +24,7 @@
 
 package com.oroarmor.netherite_plus.mixin.render;
 
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.render.VertexConsumer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;

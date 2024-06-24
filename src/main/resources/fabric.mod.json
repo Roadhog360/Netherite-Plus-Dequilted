@@ -22,6 +22,7 @@
   "mixins": [
     "netherite_plus.mixins.json"
   ],
+  "accessWidener": "netherite_plus.accesswidener",
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",

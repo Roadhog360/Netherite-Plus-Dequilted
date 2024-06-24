@@ -25,13 +25,8 @@
 package com.oroarmor.netherite_plus.mixin;
 
 import com.oroarmor.netherite_plus.NetheritePlusMod;
-import org.quiltmc.qsl.networking.api.PacketByteBufs;
-import org.quiltmc.qsl.networking.api.ServerPlayNetworking;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -39,7 +34,12 @@ import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.registry.Registries;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ProjectileEntity.class)
 public abstract class TridentEntityMixin extends Entity {
@@ -52,7 +52,11 @@ public abstract class TridentEntityMixin extends Entity {
         if ((Object) this instanceof TridentEntity tridentEntity) {
             PacketByteBuf passedData = PacketByteBufs.create();
             passedData.writeInt(Registries.ITEM.getRawId(tridentEntity.tridentStack.getItem()));
-            ServerPlayNetworking.send(this.getWorld().getServer().getPlayerManager().getPlayerList(), NetheritePlusMod.id("netherite_trident"), passedData);
+            for(ServerPlayerEntity entity : getWorld().getServer().getPlayerManager().getPlayerList()) {
+                if(ServerPlayNetworking.canSend(entity, NetheritePlusMod.id("netherite_trident"))) {
+                    ServerPlayNetworking.send(entity, NetheritePlusMod.id("netherite_trident"), passedData);
+                }
+            }
         }
     }
 }

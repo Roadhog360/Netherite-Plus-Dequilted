@@ -35,7 +35,7 @@ import net.minecraft.client.RunArgs;
 
 @Mixin(MinecraftClient.class)
 public class MinecraftClientMixin {
-    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/resource/ReloadableResourceManager;reload(Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;Ljava/util/concurrent/CompletableFuture;Ljava/util/List;)Lnet/minecraft/resource/ResourceReload;", shift = At.Shift.BEFORE))
+    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/resource/ResourceReloadLogger;reload(Lnet/minecraft/client/resource/ResourceReloadLogger$ReloadReason;Ljava/util/List;)V", shift = At.Shift.BEFORE))
     public void init(RunArgs runArgs, CallbackInfo ci) {
         NetheritePlusClientMod.registerBuiltinItemRenderers((MinecraftClient) (Object) this);
     }

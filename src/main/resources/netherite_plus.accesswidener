@@ -33,4 +33,5 @@ accessible    field    net/minecraft/item/TridentItem                           
 mutable       field    net/minecraft/entity/attribute/EntityAttributeModifier    value                      D
 accessible    field    net/minecraft/entity/attribute/EntityAttributeModifier    value                      D
 
-accessible class net/minecraft/client/render/BackgroundRenderer$FogParameters
+accessible field net/minecraft/client/render/BackgroundRenderer$FogData fogEnd F
+accessible class net/minecraft/client/render/BackgroundRenderer$FogData

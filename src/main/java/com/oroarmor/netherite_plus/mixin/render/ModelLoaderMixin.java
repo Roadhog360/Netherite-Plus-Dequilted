@@ -47,7 +47,7 @@ public abstract class ModelLoaderMixin {
     protected abstract void addModel(ModelIdentifier modelId);
 
     @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/model/ModelLoader;addModel(Lnet/minecraft/client/util/ModelIdentifier;)V", ordinal = 3, shift = At.Shift.AFTER))
-    public void addNetheriteTrident(BlockColors blockColors, Profiler profiler, Map<Identifier, JsonUnbakedModel> modelResources, Map<Identifier, List<ModelLoader.LoadedJson>> blockStateResources, CallbackInfo ci) {
+    public void addNetheriteTrident(BlockColors blockColors, Profiler profiler, Map<Identifier, JsonUnbakedModel> modelResources, Map<Identifier, List<ModelLoader.SourceTrackedData>> blockStateResources, CallbackInfo ci) {
         this.addModel(new ModelIdentifier(NetheritePlusMod.MOD_ID, "netherite_trident_in_hand", "inventory"));
     }
 }

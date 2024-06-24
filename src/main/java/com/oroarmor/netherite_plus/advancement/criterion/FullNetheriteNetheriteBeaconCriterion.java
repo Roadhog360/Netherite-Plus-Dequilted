@@ -26,15 +26,13 @@ package com.oroarmor.netherite_plus.advancement.criterion;
 
 import com.google.gson.JsonObject;
 import com.oroarmor.netherite_plus.block.entity.NetheriteBeaconBlockEntity;
-
 import net.minecraft.advancement.criterion.AbstractCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterionConditions;
 import net.minecraft.predicate.NumberRange;
 import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer;
 import net.minecraft.predicate.entity.AdvancementEntityPredicateSerializer;
-import net.minecraft.predicate.entity.EntityPredicate;
+import net.minecraft.predicate.entity.LootContextPredicate;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.unmapped.C_ctsfmifk;
 import net.minecraft.util.Identifier;
 
 import static com.oroarmor.netherite_plus.NetheritePlusMod.id;
@@ -48,7 +46,7 @@ public class FullNetheriteNetheriteBeaconCriterion extends AbstractCriterion<Ful
     }
 
     @Override
-    public Conditions conditionsFromJson(JsonObject jsonObject, C_ctsfmifk extended, AdvancementEntityPredicateDeserializer advancementEntityPredicateDeserializer) {
+    public Conditions conditionsFromJson(JsonObject jsonObject, LootContextPredicate extended, AdvancementEntityPredicateDeserializer advancementEntityPredicateDeserializer) {
         NumberRange.IntRange intRange = NumberRange.IntRange.fromJson(jsonObject.get("netherite_level"));
         return new Conditions(extended, intRange);
     }
@@ -61,13 +59,13 @@ public class FullNetheriteNetheriteBeaconCriterion extends AbstractCriterion<Ful
 
         private final NumberRange.IntRange netheriteLevel;
 
-        public Conditions(C_ctsfmifk player, NumberRange.IntRange netheriteLevel) {
+        public Conditions(LootContextPredicate player, NumberRange.IntRange netheriteLevel) {
             super(id, player);
             this.netheriteLevel = netheriteLevel;
         }
 
         public static Conditions level(NumberRange.IntRange netheriteLevel) {
-            return new Conditions(C_ctsfmifk.field_24388, netheriteLevel);
+            return new Conditions(LootContextPredicate.EMPTY, netheriteLevel);
         }
 
         public boolean matches(NetheriteBeaconBlockEntity beacon) {

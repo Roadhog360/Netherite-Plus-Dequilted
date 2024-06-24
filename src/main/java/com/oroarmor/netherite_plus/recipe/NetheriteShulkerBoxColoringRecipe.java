@@ -32,15 +32,15 @@ import net.minecraft.item.DyeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.recipe.CraftingCategory;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.SpecialCraftingRecipe;
+import net.minecraft.recipe.book.CraftingRecipeCategory;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
 public class NetheriteShulkerBoxColoringRecipe extends SpecialCraftingRecipe {
-    public NetheriteShulkerBoxColoringRecipe(Identifier identifier, CraftingCategory category) {
+    public NetheriteShulkerBoxColoringRecipe(Identifier identifier, CraftingRecipeCategory category) {
         super(identifier, category);
     }
 

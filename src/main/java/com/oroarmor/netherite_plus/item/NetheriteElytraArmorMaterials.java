@@ -65,7 +65,7 @@ public enum NetheriteElytraArmorMaterials implements ArmorMaterial {
     }
 
     @Override
-    public int getDurability(ArmorItem.ArmorSlot slot) {
+    public int getDurability(ArmorItem.Type slot) {
         return BASE_DURABILITY[slot.ordinal()] * durabilityMultiplier;
     }
 
@@ -90,7 +90,7 @@ public enum NetheriteElytraArmorMaterials implements ArmorMaterial {
     }
 
     @Override
-    public int getProtection(ArmorItem.ArmorSlot slot) {
+    public int getProtection(ArmorItem.Type slot) {
         return protectionAmounts[slot.ordinal()];
     }
 

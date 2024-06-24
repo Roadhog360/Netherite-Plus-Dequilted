@@ -45,10 +45,10 @@ import net.fabricmc.api.Environment;
 @Mixin(BackgroundRenderer.class)
 public class BackgroundRendererMixin {
     @Inject(at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderFogStart(F)V", shift = At.Shift.BEFORE), method = "applyFog", locals = LocalCapture.CAPTURE_FAILHARD)
-    private static void applyFog(Camera camera, BackgroundRenderer.FogType fogType, float viewDistance, boolean thickFog, float tickDelta, CallbackInfo ci, CameraSubmersionType cameraSubmersionType, Entity entity, BackgroundRenderer.FogParameters fogParameters) {
+    private static void applyFog(Camera camera, BackgroundRenderer.FogType fogType, float viewDistance, boolean thickFog, float tickDelta, CallbackInfo ci, CameraSubmersionType cameraSubmersionType, Entity entity, BackgroundRenderer.FogData fogData) {
         if (cameraSubmersionType == CameraSubmersionType.LAVA) {
             if (entity instanceof LivingEntity livingEntity && livingEntity.hasStatusEffect(NetheritePlusStatusEffects.LAVA_VISION)) {
-                fogParameters.fogEnd = (float) (3.0F + NetheritePlusClientMod.LAVA_VISION_DISTANCE * livingEntity.getStatusEffect(NetheritePlusStatusEffects.LAVA_VISION).getAmplifier());
+                fogData.fogEnd = (float) (3.0F + NetheritePlusClientMod.LAVA_VISION_DISTANCE * livingEntity.getStatusEffect(NetheritePlusStatusEffects.LAVA_VISION).getAmplifier());
             } 
         }
     }

@@ -27,22 +27,21 @@ package com.oroarmor.netherite_plus.mixin;
 import com.oroarmor.netherite_plus.NetheritePlusMod;
 import com.oroarmor.netherite_plus.network.LavaVisionUpdatePacket;
 import com.oroarmor.netherite_plus.screen.NetheriteAnvilScreenHandler;
-import org.quiltmc.qsl.networking.api.PacketByteBufs;
-import org.quiltmc.qsl.networking.api.ServerPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.SharedConstants;
+import net.minecraft.network.ClientConnection;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.packet.c2s.play.RenameItemC2SPacket;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayNetworkHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import net.minecraft.SharedConstants;
-import net.minecraft.network.ClientConnection;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.packet.c2s.play.ItemRenameC2SPacket;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.network.ServerPlayNetworkHandler;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
 
 @Mixin(ServerPlayNetworkHandler.class)
 public class ServerPlayNetworkHandlerMixin {
@@ -61,10 +60,10 @@ public class ServerPlayNetworkHandlerMixin {
         NetheritePlusMod.CONNECTED_CLIENTS.remove(((ServerPlayNetworkHandler) (Object) this).player);
     }
 
-    @Inject(method = "onItemRename", at = @At("RETURN"))
-    public void onRenameItem(ItemRenameC2SPacket packet, CallbackInfo info) {
+    @Inject(method = "onRenameItem", at = @At("RETURN"))
+    public void onRenameItem(RenameItemC2SPacket packet, CallbackInfo info) {
         if (((ServerPlayNetworkHandler) (Object) this).player.currentScreenHandler instanceof NetheriteAnvilScreenHandler anvilScreenHandler) {
-            String string = SharedConstants.stripInvalidCharacters(packet.getName());
+            String string = SharedConstants.stripInvalidChars(packet.getName());
             if (string.length() <= 35) {
                 anvilScreenHandler.setNewItemName(string);
             }

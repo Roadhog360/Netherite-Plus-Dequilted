@@ -48,13 +48,13 @@ public class UpdateNetheriteBeaconC2SPacket extends UpdateBeaconC2SPacket {
 
     public UpdateNetheriteBeaconC2SPacket(PacketByteBuf packetByteBuf) {
         super(packetByteBuf);
-        this.tertiaryEffect = packetByteBuf.readOptional(byteBuf -> byteBuf.readFromIterable(Registries.STATUS_EFFECT));
+        this.tertiaryEffect = packetByteBuf.readOptional(byteBuf -> byteBuf.readRegistryValue(Registries.STATUS_EFFECT));
     }
 
     @Override
     public void write(PacketByteBuf buf) {
         super.write(buf);
-        buf.writeOptional(this.tertiaryEffect, (packetByteBuf, statusEffect) -> packetByteBuf.writeFromIterable(Registries.STATUS_EFFECT, statusEffect));
+        buf.writeOptional(this.tertiaryEffect, (packetByteBuf, statusEffect) -> packetByteBuf.writeRegistryValue(Registries.STATUS_EFFECT, statusEffect));
     }
 
     public Optional<StatusEffect> getTertiaryEffect() {

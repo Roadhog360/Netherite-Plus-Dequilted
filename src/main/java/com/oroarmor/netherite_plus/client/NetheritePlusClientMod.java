@@ -38,6 +38,7 @@ import com.oroarmor.netherite_plus.network.LavaVisionUpdatePacket;
 import com.oroarmor.netherite_plus.screen.NetheritePlusScreenHandlers;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
@@ -60,7 +61,7 @@ public class NetheritePlusClientMod implements ClientModInitializer {
     public static final Queue<Integer> TRIDENT_QUEUE = new LinkedList<>();
     public static double LAVA_VISION_DISTANCE = NetheritePlusMod.CONFIG.graphics.lava_vision_distance.value();
 
-    public void onInitializeClient(ModContainer mod) {
+    public void onInitializeClient() {
         ClientPlayConnectionEvents.INIT.register((handler, client) -> {
             ClientPlayNetworking.registerReceiver(LavaVisionUpdatePacket.ID, (minecraft, listener, buf, responseSender) -> {
                 LAVA_VISION_DISTANCE = buf.readDouble();
@@ -82,7 +83,7 @@ public class NetheritePlusClientMod implements ClientModInitializer {
         NetheritePlusScreenHandlers.initializeClient();
 
         if (NetheritePlusMod.CONFIG.enabled.beacon.value()) {
-            BlockRenderLayerMap.put(RenderLayer.getCutout(), NetheritePlusBlocks.NETHERITE_BEACON);
+            BlockRenderLayerMap.INSTANCE.putBlock(NetheritePlusBlocks.NETHERITE_BEACON, RenderLayer.getCutout());
         }
 
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register(((EntityType<? extends LivingEntity> entityType, LivingEntityRenderer<?, ?> entityRenderer, LivingEntityFeatureRendererRegistrationCallback.RegistrationHelper registrationHelper, EntityRendererFactory.Context context) -> {
@@ -95,7 +96,7 @@ public class NetheritePlusClientMod implements ClientModInitializer {
     public static void registerBuiltinItemRenderers(MinecraftClient client) {
         NetheritePlusBuiltinItemModelRenderer builtinItemModelRenderer = new NetheritePlusBuiltinItemModelRenderer(client.getBlockEntityRenderDispatcher(), client.getEntityModelLoader());
 
-        ResourceLoader.get(ResourceType.CLIENT_RESOURCES).registerReloader(builtinItemModelRenderer);
+//        ResourceLoader.get(ResourceType.CLIENT_RESOURCES).registerReloader(builtinItemModelRenderer);
 
         BuiltinItemRendererRegistry.DynamicItemRenderer dynamicItemRenderer = builtinItemModelRenderer::render;
         if (NetheritePlusMod.CONFIG.enabled.shulker_boxes.value()) {
@@ -119,7 +120,7 @@ public class NetheritePlusClientMod implements ClientModInitializer {
         }
 
         if (NetheritePlusMod.CONFIG.enabled.shields.value()) {
-//            BuiltinItemRendererRegistry.INSTANCE.register(NetheritePlusItems.NETHERITE_SHIELD, dynamicItemRenderer);
+            BuiltinItemRendererRegistry.INSTANCE.register(NetheritePlusItems.NETHERITE_SHIELD, dynamicItemRenderer);
         }
         if (NetheritePlusMod.CONFIG.enabled.trident.value()) {
             BuiltinItemRendererRegistry.INSTANCE.register(NetheritePlusItems.NETHERITE_TRIDENT, dynamicItemRenderer);

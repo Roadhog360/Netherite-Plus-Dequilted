@@ -185,9 +185,9 @@ public class NetheriteShulkerBoxBlock extends BlockWithEntity {
 
     @Override
     public List<ItemStack> getDroppedStacks(BlockState state, LootContextParameterSet.Builder builder) {
-        BlockEntity blockEntity = builder.getOptionalParameter(LootContextParameters.BLOCK_ENTITY);
+        BlockEntity blockEntity = builder.getOptional(LootContextParameters.BLOCK_ENTITY);
         if (blockEntity instanceof NetheriteShulkerBoxBlockEntity shulkerBoxBlockEntity) {
-            builder = builder.withDynamicDrop(CONTENTS, (consumer) -> {
+            builder = builder.addDynamicDrop(CONTENTS, (consumer) -> {
                 for (int i = 0; i < shulkerBoxBlockEntity.size(); ++i) {
                     consumer.accept(shulkerBoxBlockEntity.getStack(i));
                 }
@@ -222,7 +222,7 @@ public class NetheriteShulkerBoxBlock extends BlockWithEntity {
 
     @Override
     public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.ANIMATED;
+        return BlockRenderType.ENTITYBLOCK_ANIMATED;
     }
 
     @Override
