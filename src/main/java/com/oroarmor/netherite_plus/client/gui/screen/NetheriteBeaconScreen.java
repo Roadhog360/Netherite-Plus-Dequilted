@@ -32,10 +32,10 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.oroarmor.netherite_plus.network.UpdateNetheriteBeaconC2SPacket;
 import com.oroarmor.netherite_plus.screen.NetheriteBeaconScreenHandler;
 import io.netty.buffer.Unpooled;
-import org.quiltmc.qsl.networking.api.client.ClientPlayNetworking;
 
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.widget.ClickableWidget;
@@ -48,9 +48,9 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.screen.BeaconScreenHandler;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerListener;
-import net.minecraft.text.CommonTexts;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -154,15 +154,15 @@ public class NetheriteBeaconScreen extends HandledScreen<NetheriteBeaconScreenHa
     }
 
     @Override
-    protected void drawForeground(GuiGraphics graphics, int mouseX, int mouseY) {
-        graphics.drawCenteredShadowedText(this.textRenderer, PRIMARY_TEXT, 62, 10, 14737632);
-        graphics.drawCenteredShadowedText(this.textRenderer, SECONDARY_TEXT, 169, 10, 14737632);
-        graphics.drawCenteredShadowedText(this.textRenderer, TERTIARY_TEXT, 169, 58, 14737632);
+    protected void drawForeground(DrawContext graphics, int mouseX, int mouseY) {
+        graphics.drawCenteredTextWithShadow(this.textRenderer, PRIMARY_TEXT, 62, 10, 14737632);
+        graphics.drawCenteredTextWithShadow(this.textRenderer, SECONDARY_TEXT, 169, 10, 14737632);
+        graphics.drawCenteredTextWithShadow(this.textRenderer, TERTIARY_TEXT, 169, 58, 14737632);
     }
 
     @Override
-    protected void drawBackground(GuiGraphics graphics, float delta, int mouseX, int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+    protected void drawBackground(DrawContext graphics, float delta, int mouseX, int mouseY) {
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         int i = (width - backgroundWidth) / 2;
         int j = (height - backgroundHeight) / 2;
@@ -174,7 +174,7 @@ public class NetheriteBeaconScreen extends HandledScreen<NetheriteBeaconScreenHa
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+    public void render(DrawContext graphics, int mouseX, int mouseY, float delta) {
         this.renderBackground(graphics);
         super.render(graphics, mouseX, mouseY, delta);
         this.drawMouseoverTooltip(graphics, mouseX, mouseY);
@@ -197,7 +197,7 @@ public class NetheriteBeaconScreen extends HandledScreen<NetheriteBeaconScreenHa
         }
 
         @Override
-        protected void renderExtra(GuiGraphics graphics) {
+        protected void renderExtra(DrawContext graphics) {
             graphics.drawTexture(TEXTURE, getX() + 2, getY() + 2, u, v, 18, 18);
         }
     }
@@ -207,7 +207,7 @@ public class NetheriteBeaconScreen extends HandledScreen<NetheriteBeaconScreenHa
         private boolean disabled;
 
         protected BaseButtonWidget(int x, int y) {
-            super(x, y, 22, 22, CommonTexts.EMPTY);
+            super(x, y, 22, 22, Text.empty());
         }
 
         protected BaseButtonWidget(int x, int y, Text text) {
@@ -215,14 +215,14 @@ public class NetheriteBeaconScreen extends HandledScreen<NetheriteBeaconScreenHa
         }
 
         @Override
-        public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+        public void render(DrawContext graphics, int mouseX, int mouseY, float delta) {
             RenderSystem.setShaderTexture(0, NetheriteBeaconScreen.TEXTURE);
             int uStart = 0;
             if (!active) {
                 uStart += width * 2;
             } else if (disabled) {
                 uStart += width;
-            } else if (isHoveredOrFocused()) {
+            } else if (isHovered() || isFocused()) {
                 uStart += width * 3;
             }
 
@@ -230,7 +230,7 @@ public class NetheriteBeaconScreen extends HandledScreen<NetheriteBeaconScreenHa
             this.renderExtra(graphics);
         }
 
-        protected abstract void renderExtra(GuiGraphics graphics);
+        protected abstract void renderExtra(DrawContext graphics);
 
         public boolean isDisabled() {
             return disabled;
@@ -241,7 +241,7 @@ public class NetheriteBeaconScreen extends HandledScreen<NetheriteBeaconScreenHa
         }
 
         @Override
-        protected void updateNarration(NarrationMessageBuilder builder) {
+        protected void appendClickableNarrations(NarrationMessageBuilder builder) {
             this.appendDefaultNarrations(builder);
         }
     }
@@ -249,7 +249,7 @@ public class NetheriteBeaconScreen extends HandledScreen<NetheriteBeaconScreenHa
     @Environment(EnvType.CLIENT)
     class CancelButtonWidget extends IconButtonWidget {
         public CancelButtonWidget(int x, int y) {
-            super(x, y, 112, 220, CommonTexts.CANCEL);
+            super(x, y, 112, 220, Text.empty()); //REPLACE WITH CANCEL
         }
 
         @Override
@@ -265,7 +265,7 @@ public class NetheriteBeaconScreen extends HandledScreen<NetheriteBeaconScreenHa
     @Environment(EnvType.CLIENT)
     class DoneButtonWidget extends IconButtonWidget {
         public DoneButtonWidget(int x, int y) {
-            super(x, y, 90, 220, CommonTexts.DONE);
+            super(x, y, 90, 220, Text.empty());
         }
 
         @Override
@@ -322,8 +322,8 @@ public class NetheriteBeaconScreen extends HandledScreen<NetheriteBeaconScreenHa
         }
 
         @Override
-        protected void renderExtra(GuiGraphics graphics) {
-            RenderSystem.setShaderTexture(0, this.sprite.getId());
+        protected void renderExtra(DrawContext graphics) {
+            RenderSystem.setShaderTexture(0, this.sprite.getAtlasId());
             graphics.drawSprite(getX() + 2, getY() + 2, 0, 18, 18, sprite);
         }
 

@@ -69,7 +69,7 @@ public class NetheriteTridentItem extends TridentItem {
                         });
                         if (riptideLevel == 0) {
                             NetheriteTridentEntity tridentEntity = new NetheriteTridentEntity(world, playerEntity, stack);
-                            tridentEntity.setProperties(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, 2.5F + riptideLevel * 0.5F, 1.0F);
+                            tridentEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, 2.5F + riptideLevel * 0.5F, 1.0F);
                             if (playerEntity.getAbilities().creativeMode) {
                                 tridentEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
                             }
@@ -97,7 +97,7 @@ public class NetheriteTridentItem extends TridentItem {
                         k *= n / m;
                         l *= n / m;
                         playerEntity.addVelocity(h, k, l);
-                        playerEntity.startRiptideAttack(20);
+                        playerEntity.useRiptide(20);
                         if (playerEntity.isOnGround()) {
                             float o = 1.1999999F;
                             playerEntity.move(MovementType.SELF, new Vec3d(0.0D, o, 0.0D));

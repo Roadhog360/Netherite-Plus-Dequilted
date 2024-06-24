@@ -24,7 +24,6 @@
 
 package com.oroarmor.netherite_plus.client.render;
 
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.oroarmor.netherite_plus.block.entity.NetheriteShulkerBoxBlockEntity;
 import com.oroarmor.netherite_plus.client.NetheritePlusTextures;
 
@@ -32,12 +31,13 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.entity.model.ShulkerEntityModel;
-import net.minecraft.client.resource.Material;
+import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.Direction;
@@ -65,11 +65,11 @@ public class NetheriteShulkerBoxBlockEntityRenderer implements BlockEntityRender
         }
 
         DyeColor dyeColor = shulkerBoxBlockEntity.getColor();
-        Material spriteIdentifier;
+        SpriteIdentifier spriteIdentifier;
         if (dyeColor == null) {
-            spriteIdentifier = new Material(NetheritePlusTextures.NETHERITE_SHULKER_BOXES_ATLAS_TEXTURE, id("entity/netherite_shulker/netherite_shulker"));
+            spriteIdentifier = new SpriteIdentifier(NetheritePlusTextures.NETHERITE_SHULKER_BOXES_ATLAS_TEXTURE, id("entity/netherite_shulker/netherite_shulker"));
         } else {
-            spriteIdentifier = new Material(NetheritePlusTextures.NETHERITE_SHULKER_BOXES_ATLAS_TEXTURE, id("entity/netherite_shulker/netherite_shulker_" + dyeColor.getName()));
+            spriteIdentifier = new SpriteIdentifier(NetheritePlusTextures.NETHERITE_SHULKER_BOXES_ATLAS_TEXTURE, id("entity/netherite_shulker/netherite_shulker_" + dyeColor.getName()));
         }
 
         matrixStack.push();

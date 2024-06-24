@@ -30,9 +30,9 @@ import com.oroarmor.netherite_plus.block.NetheritePlusBlocks;
 import com.oroarmor.netherite_plus.block.NetheriteShulkerBoxBlock;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
-import net.minecraft.block.cauldron.LeveledCauldronBlock;
-import net.minecraft.block.dispenser.DispenserBlock;
 import net.minecraft.block.dispenser.ShearsDispenserBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -140,14 +140,14 @@ public final class NetheritePlusItems {
         Item.Settings elytraSettings = new Item.Settings().maxDamage(NetheritePlusMod.CONFIG.durability.elytra.value()).rarity(Rarity.UNCOMMON).fireproof();
 
         NETHERITE_ELYTRA = register(id("netherite_elytra"), new NetheriteElytraItem(elytraSettings));
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS_AND_UTILITIES).register(entries -> {
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
             entries.addAfter(Items.ELYTRA, NETHERITE_ELYTRA);
         });
     }
 
     private static void registerFishingRod() {
         NETHERITE_FISHING_ROD = register(id("netherite_fishing_rod"), new NetheriteFishingRodItem(new Item.Settings().maxDamage(NetheritePlusMod.CONFIG.durability.fishing_rod.value()).fireproof()));
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS_AND_UTILITIES).register(entries -> {
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
             entries.addAfter(Items.FISHING_ROD, NETHERITE_FISHING_ROD);
         });
     }
@@ -197,14 +197,14 @@ public final class NetheritePlusItems {
 
         if (NetheritePlusMod.CONFIG.enabled.anvils.value()) {
             NETHERITE_ANVIL_ITEM = register(NetheritePlusBlocks.NETHERITE_ANVIL_BLOCK, new BlockItem(NetheritePlusBlocks.NETHERITE_ANVIL_BLOCK, new Item.Settings().fireproof()));
-            ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL_BLOCKS).register(entries -> {
+            ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {
                 entries.addAfter(Items.DAMAGED_ANVIL, NETHERITE_ANVIL_ITEM);
             });
         }
 
         if (NetheritePlusMod.CONFIG.enabled.beacon.value()) {
             NETHERITE_BEACON = register(NetheritePlusBlocks.NETHERITE_BEACON, new BlockItem(NetheritePlusBlocks.NETHERITE_BEACON, new Item.Settings().maxCount(64).fireproof()));
-            ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL_BLOCKS).register(entries -> {
+            ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {
                 entries.addAfter(Items.BEACON, NETHERITE_BEACON);
             });
         }
@@ -212,7 +212,7 @@ public final class NetheritePlusItems {
         if (NetheritePlusMod.CONFIG.enabled.shears.value()) {
             NETHERITE_SHEARS = register(id("netherite_shears"), new ShearsItem(new Item.Settings().fireproof().maxDamage(NetheritePlusMod.CONFIG.durability.shears.value())));
             DispenserBlock.registerBehavior(NETHERITE_SHEARS, new ShearsDispenserBehavior());
-            ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS_AND_UTILITIES).register(entries -> {
+            ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
                 entries.addAfter(Items.SHEARS, NETHERITE_SHEARS);
             });
         }
@@ -244,7 +244,7 @@ public final class NetheritePlusItems {
         NETHERITE_RED_SHULKER_BOX = register(NetheritePlusBlocks.NETHERITE_RED_SHULKER_BOX, new BlockItem(NetheritePlusBlocks.NETHERITE_RED_SHULKER_BOX, NETHERITE_SHULKER_BOX_ITEM_SETTINGS));
         NETHERITE_BLACK_SHULKER_BOX = register(NetheritePlusBlocks.NETHERITE_BLACK_SHULKER_BOX, new BlockItem(NetheritePlusBlocks.NETHERITE_BLACK_SHULKER_BOX, NETHERITE_SHULKER_BOX_ITEM_SETTINGS));
 
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL_BLOCKS).register(entries -> {
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {
             entries.addAfter(Items.PINK_SHULKER_BOX, NETHERITE_SHULKER_BOX, NETHERITE_WHITE_SHULKER_BOX, NETHERITE_LIGHT_GRAY_SHULKER_BOX, NETHERITE_GRAY_SHULKER_BOX, NETHERITE_BLACK_SHULKER_BOX, NETHERITE_BROWN_SHULKER_BOX, NETHERITE_RED_SHULKER_BOX, NETHERITE_ORANGE_SHULKER_BOX, NETHERITE_YELLOW_SHULKER_BOX, NETHERITE_LIME_SHULKER_BOX, NETHERITE_GREEN_SHULKER_BOX, NETHERITE_CYAN_SHULKER_BOX, NETHERITE_LIGHT_BLUE_SHULKER_BOX, NETHERITE_BLUE_SHULKER_BOX, NETHERITE_PURPLE_SHULKER_BOX, NETHERITE_MAGENTA_SHULKER_BOX, NETHERITE_PINK_SHULKER_BOX);
         });
 

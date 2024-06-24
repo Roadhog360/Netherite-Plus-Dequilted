@@ -26,8 +26,9 @@ package com.oroarmor.netherite_plus.client.render;
 
 import java.util.List;
 
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.oroarmor.netherite_plus.block.entity.NetheriteBeaconBlockEntity;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.util.math.RotationAxis;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
@@ -38,7 +39,6 @@ import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Axis;
 import net.minecraft.util.math.MathHelper;
 
 import net.fabricmc.api.EnvType;
@@ -66,7 +66,7 @@ public class NetheriteBeaconBlockEntityRenderer implements BlockEntityRenderer<N
         float r = color[1];
         float s = color[2];
         matrices.push();
-        matrices.multiply(Axis.Y_POSITIVE.rotationDegrees(n * 2.25F - 45.0F));
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(n * 2.25F - 45.0F));
         float af = 0.0F;
         float ai = 0.0F;
         float aj = -innerRadius;
@@ -87,8 +87,8 @@ public class NetheriteBeaconBlockEntityRenderer implements BlockEntityRenderer<N
 
     private static void renderBeamLayer(MatrixStack matrixStack, VertexConsumer vertexConsumer, float f, float g, float h, float i, int j, int k, float l, float m, float n, float o, float p, float q, float r, float s, float t, float u, float v, float w) {
         MatrixStack.Entry entry = matrixStack.peek();
-        Matrix4f matrix4f = entry.getModel();
-        Matrix3f matrix3f = entry.getNormal();
+        Matrix4f matrix4f = entry.getPositionMatrix();
+        Matrix3f matrix3f = entry.getNormalMatrix();
         renderBeamFace(matrix4f, matrix3f, vertexConsumer, f, g, h, i, j, k, l, m, n, o, t, u, v, w);
         renderBeamFace(matrix4f, matrix3f, vertexConsumer, f, g, h, i, j, k, r, s, p, q, t, u, v, w);
         renderBeamFace(matrix4f, matrix3f, vertexConsumer, f, g, h, i, j, k, n, o, r, s, t, u, v, w);
@@ -103,7 +103,7 @@ public class NetheriteBeaconBlockEntityRenderer implements BlockEntityRenderer<N
     }
 
     private static void renderBeamVertex(Matrix4f matrix4f, Matrix3f matrix3f, VertexConsumer vertexConsumer, float f, float g, float h, float i, int j, float k, float l, float m, float n) {
-        vertexConsumer.vertex(matrix4f, k, j, l).color(f, g, h, i).uv(m, n).overlay(OverlayTexture.DEFAULT_UV).light(15728880).normal(matrix3f, 0.0F, 1.0F, 0.0F).next();
+        vertexConsumer.vertex(matrix4f, k, j, l).color(f, g, h, i).texture(m, n).overlay(OverlayTexture.DEFAULT_UV).light(15728880).normal(matrix3f, 0.0F, 1.0F, 0.0F).next();
     }
 
     @Override

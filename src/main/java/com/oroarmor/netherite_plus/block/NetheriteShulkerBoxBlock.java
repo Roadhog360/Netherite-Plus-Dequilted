@@ -310,9 +310,14 @@ public class NetheriteShulkerBoxBlock extends BlockWithEntity {
         if (entity.getAnimationStage() != AnimationStage.CLOSED) {
             return true;
         } else {
-            Box box = ShulkerEntity.getOpeningDeltaBoundingBox(state.get(FACING), 0.0F, 0.5F).offset(pos).contract(1.0E-6);
+            Box box = ShulkerEntity.calculateBoundingBox(state.get(FACING), 0.0F, 0.5F).offset(pos).contract(1.0E-6);
             return world.isSpaceEmpty(box);
         }
+    }
+
+    @Override
+    public float getBlastResistance() {
+        return Blocks.NETHERITE_BLOCK.getBlastResistance();
     }
 
     @Override

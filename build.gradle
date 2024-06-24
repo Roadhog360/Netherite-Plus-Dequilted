@@ -9,6 +9,7 @@ plugins {
 
 version = project.mod_version
 group = project.maven_group
+fabric_shield_lib_version="1.7.2-1.20.2"
 
 base {
     archivesName = project.archives_base_name
@@ -38,6 +39,10 @@ repositories {
 	maven { url 'https://maven.quiltmc.org/repository/release' }
 }
 
+loom {
+    accessWidenerPath = file("src/main/resources/netherite_plus.accesswidener")
+}
+
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -48,12 +53,15 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     modImplementation "com.oroarmor:multi-item-lib:1.6.2"
-    modCompileOnly('com.github.CrimsonDawn45:Fabric-Shield-Lib:main-SNAPSHOT')
+    modImplementation "com.github.CrimsonDawn45:Fabric-Shield-Lib:v${project.fabric_shield_lib_version}"
+
     modRuntimeOnly("com.terraformersmc:modmenu:7.2.1")
 
 	modImplementation libs.quilt.config
 	modImplementation "com.electronwill.night-config:core:${libs.versions.night.config.get()}"
 	modImplementation "com.electronwill.night-config:toml:${libs.versions.night.config.get()}"
+
+	include libs.libzoomer
 
 	include libs.quilt.config
 	include "com.electronwill.night-config:core:${libs.versions.night.config.get()}"

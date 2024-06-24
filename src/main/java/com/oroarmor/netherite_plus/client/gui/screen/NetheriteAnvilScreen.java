@@ -28,14 +28,11 @@ import com.oroarmor.netherite_plus.screen.NetheriteAnvilScreenHandler;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screen.ingame.ForgingScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.c2s.play.ItemRenameC2SPacket;
 import net.minecraft.network.packet.c2s.play.RenameItemC2SPacket;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
@@ -64,7 +61,7 @@ public class NetheriteAnvilScreen extends ForgingScreen<NetheriteAnvilScreenHand
     }
 
     @Override
-    protected void drawForeground(GuiGraphics graphics, int mouseX, int mouseY) {
+    protected void drawForeground(DrawContext graphics, int mouseX, int mouseY) {
         super.drawForeground(graphics, mouseX, mouseY);
         int level = handler.getLevelCost();
         if (level > 0) {
@@ -85,7 +82,7 @@ public class NetheriteAnvilScreen extends ForgingScreen<NetheriteAnvilScreenHand
             if (text != null) {
                 int k = backgroundWidth - 8 - textRenderer.getWidth(text) - 2;
                 graphics.fill(k - 2, 67, backgroundWidth - 8, 79, 0x4f000000);
-                graphics.drawShadowedText(textRenderer, text, k, 69, color);
+                graphics.drawTextWithShadow(textRenderer, text, k, 69, color);
             }
         }
 
@@ -140,7 +137,7 @@ public class NetheriteAnvilScreen extends ForgingScreen<NetheriteAnvilScreenHand
     }
 
     @Override
-    protected void renderBackgroundTexture(DrawContext graphics, int i, int j) {
+    protected void drawInvalidRecipeArrow(DrawContext graphics, int i, int j) {
         if ((this.handler.getSlot(0).hasStack() || this.handler.getSlot(1).hasStack())
             && !this.handler.getSlot(this.handler.getResultSlotIndex()).hasStack()) {
             graphics.drawTexture(TEXTURE, i + 99, j + 45, this.backgroundWidth, 0, 28, 21);
