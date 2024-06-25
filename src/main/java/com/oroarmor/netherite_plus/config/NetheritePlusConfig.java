@@ -120,7 +120,7 @@ public final class NetheritePlusConfig extends ReflectiveConfig {
         @Comment("Enables horse armor features.")
         public final TrackedValue<Boolean> horse_armor = value(true);
         @Comment("Enables shields features.")
-        public final TrackedValue<Boolean> shields = value(false);
+        public final TrackedValue<Boolean> shields = value(true);
         @Comment("Enables shulker box features.")
         public final TrackedValue<Boolean> shulker_boxes = value(true);
         @Comment("Enables trident features.")

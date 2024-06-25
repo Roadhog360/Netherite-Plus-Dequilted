@@ -1,10 +1,15 @@
 {
   "schemaVersion": 1,
-  "id": "npdequilt",
+  "id": "netherite_plus",
   "version": "${version}",
   "name": "Netherite Plus Dequilted",
   "description": "",
-  "authors": [],
+  "authors": [
+    "OroArmor"
+  ],
+  "contributors": [
+    "Roadhog360"
+  ],
   "contact": {
     "repo": "https://github.com/Roadhog360/Netherite-Plus-Dequilted"
   },

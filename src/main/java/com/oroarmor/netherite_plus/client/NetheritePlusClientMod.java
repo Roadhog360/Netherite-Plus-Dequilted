@@ -39,8 +39,12 @@ import com.oroarmor.netherite_plus.screen.NetheritePlusScreenHandlers;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.model.loading.v1.FabricBakedModelManager;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
+import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
+import net.fabricmc.fabric.api.renderer.v1.model.FabricBakedModel;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -96,7 +100,7 @@ public class NetheritePlusClientMod implements ClientModInitializer {
     public static void registerBuiltinItemRenderers(MinecraftClient client) {
         NetheritePlusBuiltinItemModelRenderer builtinItemModelRenderer = new NetheritePlusBuiltinItemModelRenderer(client.getBlockEntityRenderDispatcher(), client.getEntityModelLoader());
 
-//        ResourceLoader.get(ResourceType.CLIENT_RESOURCES).registerReloader(builtinItemModelRenderer);
+        builtinItemModelRenderer.reload(client.getResourceManager());
 
         BuiltinItemRendererRegistry.DynamicItemRenderer dynamicItemRenderer = builtinItemModelRenderer::render;
         if (NetheritePlusMod.CONFIG.enabled.shulker_boxes.value()) {

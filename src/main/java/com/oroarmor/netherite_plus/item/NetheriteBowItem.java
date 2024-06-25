@@ -58,7 +58,7 @@ public class NetheriteBowItem extends BowItem {
         if (user instanceof PlayerEntity) {
             PlayerEntity playerEntity = (PlayerEntity) user;
             boolean bl = playerEntity.getAbilities().creativeMode || EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0;
-            ItemStack itemStack = getHeldProjectile(playerEntity, getProjectiles()); //This could be wrong
+            ItemStack itemStack = playerEntity.getProjectileType(stack);
             if (!itemStack.isEmpty() || bl) {
                 if (itemStack.isEmpty()) {
                     itemStack = new ItemStack(Items.ARROW);

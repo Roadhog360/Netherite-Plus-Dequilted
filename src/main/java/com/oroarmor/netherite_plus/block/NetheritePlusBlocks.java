@@ -96,23 +96,23 @@ public class NetheritePlusBlocks {
     }
 
     private static void registerShulkerBoxBlocks() {
-        NETHERITE_SHULKER_BOX = register("netherite_shulker_box", createShulkerBoxBlock(null, AbstractBlock.Settings.create().mapColor(MapColor.GRAY)));
-        NETHERITE_WHITE_SHULKER_BOX = register("netherite_white_shulker_box", createShulkerBoxBlock(DyeColor.WHITE, AbstractBlock.Settings.create().mapColor(MapColor.WHITE)));
-        NETHERITE_ORANGE_SHULKER_BOX = register("netherite_orange_shulker_box", createShulkerBoxBlock(DyeColor.ORANGE, AbstractBlock.Settings.create().mapColor(MapColor.ORANGE)));
-        NETHERITE_MAGENTA_SHULKER_BOX = register("netherite_magenta_shulker_box", createShulkerBoxBlock(DyeColor.MAGENTA, AbstractBlock.Settings.create().mapColor(MapColor.MAGENTA)));
-        NETHERITE_LIGHT_BLUE_SHULKER_BOX = register("netherite_light_blue_shulker_box", createShulkerBoxBlock(DyeColor.LIGHT_BLUE, AbstractBlock.Settings.create().mapColor(MapColor.LIGHT_BLUE)));
-        NETHERITE_YELLOW_SHULKER_BOX = register("netherite_yellow_shulker_box", createShulkerBoxBlock(DyeColor.YELLOW, AbstractBlock.Settings.create().mapColor(MapColor.YELLOW)));
-        NETHERITE_LIME_SHULKER_BOX = register("netherite_lime_shulker_box", createShulkerBoxBlock(DyeColor.LIME, AbstractBlock.Settings.create().mapColor(MapColor.LIME)));
-        NETHERITE_PINK_SHULKER_BOX = register("netherite_pink_shulker_box", createShulkerBoxBlock(DyeColor.PINK, AbstractBlock.Settings.create().mapColor(MapColor.PINK)));
-        NETHERITE_GRAY_SHULKER_BOX = register("netherite_gray_shulker_box", createShulkerBoxBlock(DyeColor.GRAY, AbstractBlock.Settings.create().mapColor(MapColor.GRAY)));
-        NETHERITE_LIGHT_GRAY_SHULKER_BOX = register("netherite_light_gray_shulker_box", createShulkerBoxBlock(DyeColor.LIGHT_GRAY, AbstractBlock.Settings.create().mapColor(MapColor.LIGHT_GRAY)));
-        NETHERITE_CYAN_SHULKER_BOX = register("netherite_cyan_shulker_box", createShulkerBoxBlock(DyeColor.CYAN, AbstractBlock.Settings.create().mapColor(MapColor.CYAN)));
-        NETHERITE_PURPLE_SHULKER_BOX = register("netherite_purple_shulker_box", createShulkerBoxBlock(DyeColor.PURPLE, AbstractBlock.Settings.create().mapColor(MapColor.PURPLE)));
-        NETHERITE_BLUE_SHULKER_BOX = register("netherite_blue_shulker_box", createShulkerBoxBlock(DyeColor.BLUE, AbstractBlock.Settings.create().mapColor(MapColor.BLUE)));
-        NETHERITE_BROWN_SHULKER_BOX = register("netherite_brown_shulker_box", createShulkerBoxBlock(DyeColor.BROWN, AbstractBlock.Settings.create().mapColor(MapColor.BROWN)));
-        NETHERITE_GREEN_SHULKER_BOX = register("netherite_green_shulker_box", createShulkerBoxBlock(DyeColor.GREEN, AbstractBlock.Settings.create().mapColor(MapColor.GREEN)));
-        NETHERITE_RED_SHULKER_BOX = register("netherite_red_shulker_box", createShulkerBoxBlock(DyeColor.RED, AbstractBlock.Settings.create().mapColor(MapColor.RED)));
-        NETHERITE_BLACK_SHULKER_BOX = register("netherite_black_shulker_box", createShulkerBoxBlock(DyeColor.BLACK, AbstractBlock.Settings.create().mapColor(MapColor.BLACK)));
+        NETHERITE_SHULKER_BOX = register("netherite_shulker_box", createShulkerBoxBlock(null, AbstractBlock.Settings.create().mapColor(MapColor.GRAY).sounds(BlockSoundGroup.NETHERITE)));
+        NETHERITE_WHITE_SHULKER_BOX = register("netherite_white_shulker_box", createShulkerBoxBlock(DyeColor.WHITE, AbstractBlock.Settings.create().mapColor(MapColor.WHITE).sounds(BlockSoundGroup.NETHERITE)));
+        NETHERITE_ORANGE_SHULKER_BOX = register("netherite_orange_shulker_box", createShulkerBoxBlock(DyeColor.ORANGE, AbstractBlock.Settings.create().mapColor(MapColor.ORANGE).sounds(BlockSoundGroup.NETHERITE)));
+        NETHERITE_MAGENTA_SHULKER_BOX = register("netherite_magenta_shulker_box", createShulkerBoxBlock(DyeColor.MAGENTA, AbstractBlock.Settings.create().mapColor(MapColor.MAGENTA).sounds(BlockSoundGroup.NETHERITE)));
+        NETHERITE_LIGHT_BLUE_SHULKER_BOX = register("netherite_light_blue_shulker_box", createShulkerBoxBlock(DyeColor.LIGHT_BLUE, AbstractBlock.Settings.create().mapColor(MapColor.LIGHT_BLUE).sounds(BlockSoundGroup.NETHERITE)));
+        NETHERITE_YELLOW_SHULKER_BOX = register("netherite_yellow_shulker_box", createShulkerBoxBlock(DyeColor.YELLOW, AbstractBlock.Settings.create().mapColor(MapColor.YELLOW).sounds(BlockSoundGroup.NETHERITE)));
+        NETHERITE_LIME_SHULKER_BOX = register("netherite_lime_shulker_box", createShulkerBoxBlock(DyeColor.LIME, AbstractBlock.Settings.create().mapColor(MapColor.LIME).sounds(BlockSoundGroup.NETHERITE)));
+        NETHERITE_PINK_SHULKER_BOX = register("netherite_pink_shulker_box", createShulkerBoxBlock(DyeColor.PINK, AbstractBlock.Settings.create().mapColor(MapColor.PINK).sounds(BlockSoundGroup.NETHERITE)));
+        NETHERITE_GRAY_SHULKER_BOX = register("netherite_gray_shulker_box", createShulkerBoxBlock(DyeColor.GRAY, AbstractBlock.Settings.create().mapColor(MapColor.GRAY).sounds(BlockSoundGroup.NETHERITE)));
+        NETHERITE_LIGHT_GRAY_SHULKER_BOX = register("netherite_light_gray_shulker_box", createShulkerBoxBlock(DyeColor.LIGHT_GRAY, AbstractBlock.Settings.create().mapColor(MapColor.LIGHT_GRAY).sounds(BlockSoundGroup.NETHERITE)));
+        NETHERITE_CYAN_SHULKER_BOX = register("netherite_cyan_shulker_box", createShulkerBoxBlock(DyeColor.CYAN, AbstractBlock.Settings.create().mapColor(MapColor.CYAN).sounds(BlockSoundGroup.NETHERITE)));
+        NETHERITE_PURPLE_SHULKER_BOX = register("netherite_purple_shulker_box", createShulkerBoxBlock(DyeColor.PURPLE, AbstractBlock.Settings.create().mapColor(MapColor.PURPLE).sounds(BlockSoundGroup.NETHERITE)));
+        NETHERITE_BLUE_SHULKER_BOX = register("netherite_blue_shulker_box", createShulkerBoxBlock(DyeColor.BLUE, AbstractBlock.Settings.create().mapColor(MapColor.BLUE).sounds(BlockSoundGroup.NETHERITE)));
+        NETHERITE_BROWN_SHULKER_BOX = register("netherite_brown_shulker_box", createShulkerBoxBlock(DyeColor.BROWN, AbstractBlock.Settings.create().mapColor(MapColor.BROWN).sounds(BlockSoundGroup.NETHERITE)));
+        NETHERITE_GREEN_SHULKER_BOX = register("netherite_green_shulker_box", createShulkerBoxBlock(DyeColor.GREEN, AbstractBlock.Settings.create().mapColor(MapColor.GREEN).sounds(BlockSoundGroup.NETHERITE)));
+        NETHERITE_RED_SHULKER_BOX = register("netherite_red_shulker_box", createShulkerBoxBlock(DyeColor.RED, AbstractBlock.Settings.create().mapColor(MapColor.RED).sounds(BlockSoundGroup.NETHERITE)));
+        NETHERITE_BLACK_SHULKER_BOX = register("netherite_black_shulker_box", createShulkerBoxBlock(DyeColor.BLACK, AbstractBlock.Settings.create().mapColor(MapColor.BLACK).sounds(BlockSoundGroup.NETHERITE)));
 
         NETHERITE_SHULKER_BOX_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, id("netherite_shulker_box"),
                 BlockEntityType.Builder.create(NetheriteShulkerBoxBlockEntity::new,

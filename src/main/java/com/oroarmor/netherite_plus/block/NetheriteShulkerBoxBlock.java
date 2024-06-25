@@ -29,6 +29,7 @@ import java.util.List;
 
 import com.oroarmor.netherite_plus.block.entity.NetheriteShulkerBoxBlockEntity;
 import com.oroarmor.netherite_plus.block.entity.NetheriteShulkerBoxBlockEntity.AnimationStage;
+import net.minecraft.sound.BlockSoundGroup;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.block.*;

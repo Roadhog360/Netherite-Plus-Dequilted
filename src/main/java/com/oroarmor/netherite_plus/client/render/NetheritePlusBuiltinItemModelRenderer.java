@@ -34,6 +34,7 @@ import com.oroarmor.netherite_plus.block.NetheriteShulkerBoxBlock;
 import com.oroarmor.netherite_plus.block.entity.NetheriteShulkerBoxBlockEntity;
 import com.oroarmor.netherite_plus.client.NetheritePlusTextures;
 import com.oroarmor.netherite_plus.item.NetheritePlusItems;
+import net.minecraft.client.model.Model;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 
@@ -55,6 +56,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.SynchronousResourceReloader;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -62,13 +64,12 @@ import net.minecraft.world.event.listener.GameEventListener;
 
 import static com.oroarmor.netherite_plus.NetheritePlusMod.id;
 
-public class NetheritePlusBuiltinItemModelRenderer extends BuiltinModelItemRenderer {
+public class NetheritePlusBuiltinItemModelRenderer implements SynchronousResourceReloader {
 
     private final BlockEntityRenderDispatcher blockEntityRenderDispatcher;
     private final EntityModelLoader entityModelLoader;
 
     public NetheritePlusBuiltinItemModelRenderer(BlockEntityRenderDispatcher blockEntityRenderDispatcher, EntityModelLoader entityModelLoader) {
-        super(blockEntityRenderDispatcher, entityModelLoader);
         this.blockEntityRenderDispatcher = blockEntityRenderDispatcher;
         this.entityModelLoader = entityModelLoader;
     }
@@ -81,11 +82,15 @@ public class NetheritePlusBuiltinItemModelRenderer extends BuiltinModelItemRende
 
     @Override
     public void reload(ResourceManager manager) {
-        this.modelShield = new ShieldEntityModel(this.entityModelLoader.getModelPart(EntityModelLayers.SHIELD));
-        this.modelTrident = new TridentEntityModel(this.entityModelLoader.getModelPart(EntityModelLayers.TRIDENT));
+//        this.modelShield = new ShieldEntityModel(this.entityModelLoader.getModelPart(EntityModelLayers.SHIELD));
+//        this.modelTrident = new TridentEntityModel(this.entityModelLoader.getModelPart(EntityModelLayers.TRIDENT));
+        modelShield = null;
+        modelTrident = null;
     }
 
     public void render(ItemStack itemStack, ModelTransformationMode transformType, MatrixStack matrices, VertexConsumerProvider vertices, int light, int overlay) {
+        if(modelShield == null) modelShield = new ShieldEntityModel(this.entityModelLoader.getModelPart(EntityModelLayers.SHIELD));
+        if(modelTrident == null) modelTrident = new TridentEntityModel(this.entityModelLoader.getModelPart(EntityModelLayers.TRIDENT));
         if (itemStack.isOf(NetheritePlusItems.NETHERITE_TRIDENT)) {
             renderTrident(modelTrident, itemStack, transformType, matrices, vertices, light, overlay);
         } else if (itemStack.isOf(NetheritePlusItems.NETHERITE_SHIELD)) {
