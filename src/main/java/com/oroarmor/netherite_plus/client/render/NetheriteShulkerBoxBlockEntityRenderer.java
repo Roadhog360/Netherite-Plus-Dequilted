@@ -24,6 +24,7 @@
 
 package com.oroarmor.netherite_plus.client.render;
 
+import com.oroarmor.netherite_plus.block.NetheriteShulkerBoxBlock;
 import com.oroarmor.netherite_plus.block.entity.NetheriteShulkerBoxBlockEntity;
 import com.oroarmor.netherite_plus.client.NetheritePlusTextures;
 
@@ -59,7 +60,7 @@ public class NetheriteShulkerBoxBlockEntityRenderer implements BlockEntityRender
         Direction direction = Direction.UP;
         if (shulkerBoxBlockEntity.hasWorld()) {
             BlockState blockState = shulkerBoxBlockEntity.getWorld().getBlockState(shulkerBoxBlockEntity.getPos());
-            if (blockState.getBlock() instanceof ShulkerBoxBlock) {
+            if (blockState.getBlock() instanceof NetheriteShulkerBoxBlock) {
                 direction = blockState.get(ShulkerBoxBlock.FACING);
             }
         }
