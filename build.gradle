@@ -61,8 +61,6 @@ dependencies {
 	modImplementation "com.electronwill.night-config:core:${libs.versions.night.config.get()}"
 	modImplementation "com.electronwill.night-config:toml:${libs.versions.night.config.get()}"
 
-	include libs.libzoomer
-
 	include libs.quilt.config
 	include "com.electronwill.night-config:core:${libs.versions.night.config.get()}"
 	include "com.electronwill.night-config:toml:${libs.versions.night.config.get()}"

@@ -87,8 +87,8 @@ public class NetheriteBeaconScreenHandler extends ScreenHandler {
     }
 
     @Override
-    public void close(PlayerEntity player) {
-        super.close(player);
+    public void onClosed(PlayerEntity player) {
+        super.onClosed(player);
         if (!player.getWorld().isClient) {
             ItemStack itemStack = paymentSlot.takeStack(paymentSlot.getMaxItemCount());
             if (!itemStack.isEmpty()) {
@@ -110,7 +110,7 @@ public class NetheriteBeaconScreenHandler extends ScreenHandler {
     }
 
     @Override
-    public ItemStack quickTransfer(PlayerEntity player, int index) {
+    public ItemStack quickMove(PlayerEntity player, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = slots.get(index);
         if (slot != null && slot.hasStack()) {

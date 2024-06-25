@@ -5,8 +5,10 @@ import com.electronwill.nightconfig.toml.TomlWriter;
 import net.fabricmc.loader.impl.FabricLoaderImpl;
 import org.quiltmc.config.api.Config;
 import org.quiltmc.config.api.ConfigEnvironment;
+import org.quiltmc.config.api.ReflectiveConfig;
 import org.quiltmc.config.api.WrappedConfig;
 import org.quiltmc.config.impl.ConfigImpl;
+import org.quiltmc.config.implementor_api.ConfigFactory;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,7 +21,6 @@ public final class FabricatedQuiltConfig {
     private static ConfigEnvironment getConfigEnvironment() {
         if (ENV == null) {
             var serializer = new NightConfigSerializer<>("toml", new TomlParser(), new TomlWriter());
-            com.electronwill.nightconfig.
 
             var env = new ConfigEnvironment(FabricLoaderImpl.INSTANCE.getConfigDir(), serializer.getFileExtension(), serializer);
 
@@ -31,19 +32,11 @@ public final class FabricatedQuiltConfig {
         return ENV;
     }
 
-    public static Config create(String family, String id, Path path, Config.Creator... creators) {
-        return ConfigImpl.create(getConfigEnvironment(), family, id, path, creators);
+    public static <C extends ReflectiveConfig> C create(String family, String id, Path path, Config.Creator before, Class<C> configCreatorClass, Config.Creator after) {
+        return ConfigFactory.create(getConfigEnvironment(), family, id, path, before, configCreatorClass, after);
     }
 
-    /**
-     * Creates and registers a config file
-     *
-     * @param family the mod owning the resulting config file
-     * @param id the configs id
-     * @param creators any number of {@link Config.Creator}s that can be used to configure the resulting config
-     */
-    public static Config create(String family, String id, Config.Creator... creators) {
-        return create(family, id, Paths.get(""), creators);
+    public static <C extends ReflectiveConfig> C create(String family, String id, Class<C> configCreatorClass) {
+        return create(family, id, Paths.get(""), builder -> {}, configCreatorClass, builder -> {});
     }
-
 }

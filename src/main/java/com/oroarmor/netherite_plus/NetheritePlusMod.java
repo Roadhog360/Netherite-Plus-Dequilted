@@ -83,7 +83,7 @@ public class NetheritePlusMod implements ModInitializer {
         CONFIG.registerCallback(config -> {
             PacketByteBuf buf = PacketByteBufs.create();
             buf.writeDouble(CONFIG.graphics.lava_vision_distance.value());
-            ServerPlayNetworking.send(CONNECTED_CLIENTS, LavaVisionUpdatePacket.ID, buf);
+            CONNECTED_CLIENTS.stream().filter(player -> ServerPlayNetworking.canSend(player, LavaVisionUpdatePacket.ID)).forEach(player -> ServerPlayNetworking.send(player, LavaVisionUpdatePacket.ID, buf));
         });
         NetheritePlusMod.registerItemsWithMultiItemLib();
     }

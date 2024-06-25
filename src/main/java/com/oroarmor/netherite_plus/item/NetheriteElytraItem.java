@@ -33,7 +33,7 @@ import net.fabricmc.fabric.api.entity.event.v1.FabricElytraItem;
 public class NetheriteElytraItem extends ArmorItem implements FabricElytraItem {
 
     public NetheriteElytraItem(Settings settings) {
-        super(NetheriteElytraArmorMaterials.NETHERITE_ELYTRA_MATERIAL, ArmorSlot.CHESTPLATE, settings);
+        super(NetheriteElytraArmorMaterials.NETHERITE_ELYTRA_MATERIAL, ArmorItem.Type.CHESTPLATE, settings);
     }
 
     @Override

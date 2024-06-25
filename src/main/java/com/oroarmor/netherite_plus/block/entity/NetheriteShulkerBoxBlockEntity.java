@@ -213,7 +213,7 @@ public class NetheriteShulkerBoxBlockEntity extends LootableContainerBlockEntity
     private void pushEntities(World world, BlockPos pos, BlockState state) {
         if (state.getBlock() instanceof NetheriteShulkerBoxBlock) {
             Direction direction = state.get(NetheriteShulkerBoxBlock.FACING);
-            Box box = ShulkerEntity.getOpeningDeltaBoundingBox(direction, this.prevAnimationProgress, this.animationProgress).offset(pos);
+            Box box = ShulkerEntity.calculateBoundingBox(direction, this.prevAnimationProgress, this.animationProgress).offset(pos);
             List<Entity> list = world.getOtherEntities(null, box);
             if (!list.isEmpty()) {
                 for (Entity entity : list) {

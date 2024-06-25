@@ -1,0 +1,12 @@
+[versions]
+quilt_config = "1.1.0-beta.3"
+night_config = "3.6.6"
+libzoomer = "0.7.0+1.20.1"
+
+[libraries]
+quilt_config = { module = "org.quiltmc:quilt-config", version.ref = "quilt_config" }
+libzoomer = { module = "io.github.ennuil:Fabricated-LibZoomer", version.ref = "libzoomer" }
+
+[plugins]
+machete = { id = "io.github.p03w.machete", version = "2.0.+" }
+vineflower = { id = "io.github.juuxel.loom-vineflower", version = "1.11.0" }

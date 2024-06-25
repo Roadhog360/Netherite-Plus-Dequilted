@@ -77,7 +77,7 @@ public class NetheriteFishingBobberEntity extends FishingBobberEntity {
         BlockState blockState = this.getWorld().getBlockState(pos);
         if (!blockState.isAir()) {
             FluidState fluidState = blockState.getFluidState();
-            return fluidState.isIn(FluidTags.LAVA) && fluidState.isSource() && blockState.getCollisionShape(this.getWorld(), pos).isEmpty() ? FishingBobberEntity.PositionType.INSIDE_WATER : FishingBobberEntity.PositionType.INVALID;
+            return fluidState.isIn(FluidTags.LAVA) && fluidState.isStill() && blockState.getCollisionShape(this.getWorld(), pos).isEmpty() ? FishingBobberEntity.PositionType.INSIDE_WATER : FishingBobberEntity.PositionType.INVALID;
         } else {
             return FishingBobberEntity.PositionType.ABOVE_WATER;
         }
@@ -272,10 +272,10 @@ public class NetheriteFishingBobberEntity extends FishingBobberEntity {
                     q = getX() + o * fishTravelCountdown * 0.1F;
                     r = MathHelper.floor(getY()) + 1.0F;
                     s = getZ() + p * fishTravelCountdown * 0.1F;
-                    blockState2 = serverWorld.getBlockState(BlockPos.create(q, r - 1.0D, s));
+                    blockState2 = serverWorld.getBlockState(BlockPos.ofFloored(q, r - 1.0D, s));
                     if (blockState2.isOf(Blocks.LAVA)) {
                         if (random.nextFloat() < 0.15F) {
-                            serverWorld.spawnParticles(ParticleTypes.LAVA_SPLASH, q, r - 0.10000000149011612D, s, 1, o, 0.1D, p, 0.0D);
+                            serverWorld.spawnParticles(ParticleTypes.LANDING_LAVA, q, r - 0.10000000149011612D, s, 1, o, 0.1D, p, 0.0D);
                         }
 
                         float k = o * 0.04F;
@@ -286,7 +286,7 @@ public class NetheriteFishingBobberEntity extends FishingBobberEntity {
                 } else {
                     playSound(SoundEvents.ENTITY_FISHING_BOBBER_SPLASH, 0.25F, 1.0F + (random.nextFloat() - random.nextFloat()) * 0.4F);
                     double m = getY() + 0.5D;
-                    serverWorld.spawnParticles(ParticleTypes.LAVA_SPLASH, getX(), m, getZ(), (int) (1.0F + getWidth() * 20.0F), getWidth(), 0.0D, getWidth(), 0.20000000298023224D);
+                    serverWorld.spawnParticles(ParticleTypes.LANDING_LAVA, getX(), m, getZ(), (int) (1.0F + getWidth() * 20.0F), getWidth(), 0.0D, getWidth(), 0.20000000298023224D);
                     serverWorld.spawnParticles(ParticleTypes.FLAME, getX(), m, getZ(), (int) (1.0F + getWidth() * 20.0F), getWidth(), 0.0D, getWidth(), 0.20000000298023224D);
                     hookCountdown = MathHelper.nextInt(random, 20, 40);
                     getDataTracker().set(CAUGHT_FISH, true);
@@ -308,7 +308,7 @@ public class NetheriteFishingBobberEntity extends FishingBobberEntity {
                     q = getX() + MathHelper.sin(o) * p * 0.1F;
                     r = MathHelper.floor(getY()) + 1.0F;
                     s = getZ() + MathHelper.cos(o) * p * 0.1F;
-                    blockState2 = serverWorld.getBlockState(BlockPos.create(q, r - 1.0D, s));
+                    blockState2 = serverWorld.getBlockState(BlockPos.ofFloored(q, r - 1.0D, s));
                     if (blockState2.isOf(Blocks.LAVA)) {
                         serverWorld.spawnParticles(ParticleTypes.SMOKE, q, r, s, 2 + random.nextInt(2), 0.10000000149011612D, 0.0D, 0.10000000149011612D, 0.0D);
                     }
@@ -346,7 +346,7 @@ public class NetheriteFishingBobberEntity extends FishingBobberEntity {
                         .add(LootContextParameters.ORIGIN, this.getPos())
                         .add(LootContextParameters.TOOL, usedItem)
                         .add(LootContextParameters.THIS_ENTITY, this)
-                        .withLuck((float)this.luckOfTheSeaLevel + playerEntity.getLuck())
+                        .luck((float)this.luckOfTheSeaLevel + playerEntity.getLuck())
                         .build(LootContextTypes.FISHING);
                 LootTable lootTable = this.getWorld().getServer().getLootManager().getLootTable(LAVA_FISHING_LOOT_TABLE);
                 List<ItemStack> list = lootTable.generateLoot(lootContextParameterSet);

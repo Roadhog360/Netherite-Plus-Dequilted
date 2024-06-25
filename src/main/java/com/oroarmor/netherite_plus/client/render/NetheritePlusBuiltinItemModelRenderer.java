@@ -28,14 +28,14 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.datafixers.util.Pair;
 import com.oroarmor.netherite_plus.block.NetheritePlusBlocks;
 import com.oroarmor.netherite_plus.block.NetheriteShulkerBoxBlock;
 import com.oroarmor.netherite_plus.block.entity.NetheriteShulkerBoxBlockEntity;
 import com.oroarmor.netherite_plus.client.NetheritePlusTextures;
 import com.oroarmor.netherite_plus.item.NetheritePlusItems;
-import org.quiltmc.qsl.resource.loader.api.reloader.SimpleSynchronousResourceReloader;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 
 import net.minecraft.block.entity.BannerBlockEntity;
 import net.minecraft.block.entity.BannerPattern;
@@ -48,33 +48,36 @@ import net.minecraft.client.render.entity.model.ShieldEntityModel;
 import net.minecraft.client.render.entity.model.TridentEntityModel;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
-import net.minecraft.client.resource.Material;
+import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
-import net.minecraft.registry.Holder;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.event.listener.GameEventListener;
 
 import static com.oroarmor.netherite_plus.NetheritePlusMod.id;
 
-public class NetheritePlusBuiltinItemModelRenderer implements SimpleSynchronousResourceReloader {
-    private static final NetheriteShulkerBoxBlockEntity RENDER_NETHERITE_SHULKER_BOX = new NetheriteShulkerBoxBlockEntity(BlockPos.ORIGIN, NetheritePlusBlocks.NETHERITE_SHULKER_BOX.getDefaultState());
-    private static final NetheriteShulkerBoxBlockEntity[] RENDER_NETHERITE_SHULKER_BOX_DYED = Arrays.stream(DyeColor.values()).sorted(Comparator.comparingInt(DyeColor::getId)).map(dyeColor -> new NetheriteShulkerBoxBlockEntity(dyeColor, BlockPos.ORIGIN, NetheritePlusBlocks.NETHERITE_SHULKER_BOX.getDefaultState())).toArray(NetheriteShulkerBoxBlockEntity[]::new);
+public class NetheritePlusBuiltinItemModelRenderer extends BuiltinModelItemRenderer {
 
+    private final BlockEntityRenderDispatcher blockEntityRenderDispatcher;
     private final EntityModelLoader entityModelLoader;
-    private final BlockEntityRenderDispatcher blockEntityRenderDispatcher;    
-
-    private ShieldEntityModel modelShield;
-    private TridentEntityModel modelTrident;
 
     public NetheritePlusBuiltinItemModelRenderer(BlockEntityRenderDispatcher blockEntityRenderDispatcher, EntityModelLoader entityModelLoader) {
+        super(blockEntityRenderDispatcher, entityModelLoader);
         this.blockEntityRenderDispatcher = blockEntityRenderDispatcher;
         this.entityModelLoader = entityModelLoader;
     }
+
+    private static final NetheriteShulkerBoxBlockEntity RENDER_NETHERITE_SHULKER_BOX = new NetheriteShulkerBoxBlockEntity(BlockPos.ORIGIN, NetheritePlusBlocks.NETHERITE_SHULKER_BOX.getDefaultState());
+    private static final NetheriteShulkerBoxBlockEntity[] RENDER_NETHERITE_SHULKER_BOX_DYED = Arrays.stream(DyeColor.values()).sorted(Comparator.comparingInt(DyeColor::getId)).map(dyeColor -> new NetheriteShulkerBoxBlockEntity(dyeColor, BlockPos.ORIGIN, NetheritePlusBlocks.NETHERITE_SHULKER_BOX.getDefaultState())).toArray(NetheriteShulkerBoxBlockEntity[]::new);
+
+    private ShieldEntityModel modelShield;
+    private TridentEntityModel modelTrident;
 
     @Override
     public void reload(ResourceManager manager) {
@@ -103,11 +106,11 @@ public class NetheritePlusBuiltinItemModelRenderer implements SimpleSynchronousR
         boolean bl = stack.getSubNbt("BlockEntityTag") != null;
         matrices.push();
         matrices.scale(1.0F, -1.0F, -1.0F);
-        Material material = bl ? NetheritePlusTextures.NETHERITE_SHIELD_BASE : NetheritePlusTextures.NETHERITE_SHIELD_BASE_NO_PATTERN;
-        VertexConsumer vertexConsumer = material.getSprite().getTextureSpecificVertexConsumer(ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, model.getLayer(material.getTexture()), true, stack.hasGlint()));
+        SpriteIdentifier material = bl ? NetheritePlusTextures.NETHERITE_SHIELD_BASE : NetheritePlusTextures.NETHERITE_SHIELD_BASE_NO_PATTERN;
+        VertexConsumer vertexConsumer = material.getSprite().getTextureSpecificVertexConsumer(ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, model.getLayer(material.getTextureId()), true, stack.hasGlint()));
         model.getHandle().render(matrices, vertexConsumer, light, overlay, 1.0F, 1.0F, 1.0F, 1.0F);
         if (bl) {
-            List<Pair<Holder<BannerPattern>, DyeColor>> list = BannerBlockEntity.getPatternsFromNbt(ShieldItem.getColor(stack), BannerBlockEntity.getPatternListTag(stack));
+            List<Pair<RegistryEntry<BannerPattern>, DyeColor>> list = BannerBlockEntity.getPatternsFromNbt(ShieldItem.getColor(stack), BannerBlockEntity.getPatternListNbt(stack));
             BannerBlockEntityRenderer.renderCanvas(matrices, vertexConsumers, light, overlay, model.getPlate(), material, false, list, stack.hasGlint());
         } else {
             model.getPlate().render(matrices, vertexConsumer, light, overlay, 1.0F, 1.0F, 1.0F, 1.0F);
@@ -124,8 +127,8 @@ public class NetheritePlusBuiltinItemModelRenderer implements SimpleSynchronousR
         matrices.pop();
     }
 
-    @Override
-    public Identifier getQuiltId() {
-        return id("netherite_plus_builtin_item_model_reloader");
-    }
+//    @Override
+//    public Identifier getQuiltId() {
+//        return id("netherite_plus_builtin_item_model_reloader");
+//    }
 }
