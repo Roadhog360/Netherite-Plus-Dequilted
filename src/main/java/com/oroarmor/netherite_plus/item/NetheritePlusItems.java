@@ -36,12 +36,7 @@ import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.block.dispenser.ShearsDispenserBehavior;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroups;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.ShearsItem;
+import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.stat.Stats;
@@ -130,8 +125,8 @@ public final class NetheritePlusItems {
     }
 
     private static void registerBowAndCrossbow() {
-        NETHERITE_BOW = register(id("netherite_bow"), new NetheriteBowItem(new Item.Settings().maxDamage(NetheritePlusMod.CONFIG.durability.bow.value()).fireproof()));
-        NETHERITE_CROSSBOW = register(id("netherite_crossbow"), new NetheriteCrossbowItem(new Item.Settings().maxDamage(NetheritePlusMod.CONFIG.durability.crossbow.value()).fireproof()));
+        NETHERITE_BOW = register(id("netherite_bow"), new BowItem(new Item.Settings().maxDamage(NetheritePlusMod.CONFIG.durability.bow.value()).fireproof()));
+        NETHERITE_CROSSBOW = register(id("netherite_crossbow"), new CrossbowItem(new Item.Settings().maxDamage(NetheritePlusMod.CONFIG.durability.crossbow.value()).fireproof()));
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
             entries.addAfter(Items.BOW, NETHERITE_BOW);
             entries.addAfter(Items.CROSSBOW, NETHERITE_CROSSBOW);
