@@ -8,7 +8,6 @@
     "BowItemMixin",
     "CrossbowItemMixin",
     "ItemPredicateMixin",
-    "PlayerEntityMixin",
     "ServerPlayNetworkHandlerMixin",
     "ShulkerBoxBlockEntityMixin",
     "TridentEntityMixin"
