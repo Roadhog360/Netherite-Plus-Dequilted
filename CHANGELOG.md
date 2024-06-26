@@ -1,3 +1,10 @@
+Version 2.2.1
+
+- Requires new version of Multi Item Lib
+- Fixed Netherite Shulker Box sound
+- Re-enabled shields, removed Fabric-Shield-Lib dependency
+- Update by Roadhog360
+----
 Version 2.2.0
 
 - Update to Minecraft 1.20.1

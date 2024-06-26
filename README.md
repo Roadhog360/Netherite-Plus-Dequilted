@@ -7,7 +7,6 @@ Discord: https://discord.gg/dGCvj56
 
 * Netherite Shulker Boxes
   - Don't burn in lava
-  - Still are exploded by TNT, will be fixed soon
   
 * Netherite Fishing Rod
   - Doesnt burn in lava
