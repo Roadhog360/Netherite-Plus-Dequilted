@@ -34,6 +34,7 @@ import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.block.cauldron.LeveledCauldronBlock;
 import net.minecraft.block.dispenser.DispenserBlock;
 import net.minecraft.block.dispenser.ShearsDispenserBehavior;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
@@ -48,6 +49,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
+
 import static com.oroarmor.netherite_plus.NetheritePlusMod.id;
 
 public final class NetheritePlusItems {
@@ -219,10 +222,10 @@ public final class NetheritePlusItems {
     }
 
     private static void registerShield() {
-//        NETHERITE_SHIELD = register(id("netherite_shield"), new NetheriteShieldItem(new QuiltItemSettings().maxDamage(NetheritePlusMod.CONFIG.durability.shield.value()).fireproof().equipmentSlot(stack -> EquipmentSlot.OFFHAND)));
-//        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
-//            entries.addAfter(Items.SHIELD, NETHERITE_SHIELD);
-//        });
+        NETHERITE_SHIELD = register(id("netherite_shield"), new NetheriteShieldItem(new QuiltItemSettings().maxDamage(NetheritePlusMod.CONFIG.durability.shield.value()).fireproof().equipmentSlot(stack -> EquipmentSlot.OFFHAND)));
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
+            entries.addAfter(Items.SHIELD, NETHERITE_SHIELD);
+        });
     }
 
     private static void registerShulkerBoxes() {

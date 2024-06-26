@@ -109,7 +109,7 @@ public class NetheritePlusModelProvider {
 		}
 
 		if (NetheritePlusMod.CONFIG.enabled.shields.value()) {
-//			registerShieldModels();
+			registerShieldModels();
 		}
 
 		if (NetheritePlusMod.CONFIG.enabled.fishing_rod.value()) {

@@ -95,7 +95,7 @@ public class NetheritePlusMod implements ModInitializer {
 
     public static void registerItemsWithMultiItemLib() {
         if (CONFIG.enabled.shields.value()) {
-//            UniqueItemRegistry.SHIELD.addItemToRegistry(NETHERITE_SHIELD);
+            UniqueItemRegistry.SHIELD.addItemToRegistry(NETHERITE_SHIELD);
         }
         if (CONFIG.enabled.fishing_rod.value()) {
             UniqueItemRegistry.FISHING_ROD.addItemToRegistry(NETHERITE_FISHING_ROD);

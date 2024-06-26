@@ -122,7 +122,7 @@ public class NetheritePlusClientMod implements ClientModInitializer {
         }
 
         if (NetheritePlusMod.CONFIG.enabled.shields.value()) {
-//            BuiltinItemRendererRegistry.INSTANCE.register(NetheritePlusItems.NETHERITE_SHIELD, dynamicItemRenderer);
+            BuiltinItemRendererRegistry.INSTANCE.register(NetheritePlusItems.NETHERITE_SHIELD, dynamicItemRenderer);
         }
         if (NetheritePlusMod.CONFIG.enabled.trident.value()) {
             BuiltinItemRendererRegistry.INSTANCE.register(NetheritePlusItems.NETHERITE_TRIDENT, dynamicItemRenderer);

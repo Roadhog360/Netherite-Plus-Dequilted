@@ -41,7 +41,6 @@ import net.minecraft.entity.LivingEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-@Environment(EnvType.CLIENT)
 @Mixin(BackgroundRenderer.class)
 public class BackgroundRendererMixin {
     @Inject(at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderFogStart(F)V", shift = At.Shift.BEFORE), method = "applyFog", locals = LocalCapture.CAPTURE_FAILHARD)

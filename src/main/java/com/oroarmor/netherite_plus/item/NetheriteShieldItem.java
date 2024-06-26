@@ -30,7 +30,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.ShieldItem;
 
-public class NetheriteShieldItem extends ShieldItem implements FabricShield {
+public class NetheriteShieldItem extends ShieldItem {
     public NetheriteShieldItem(Settings settings) {
         super(settings);
     }
@@ -38,16 +38,5 @@ public class NetheriteShieldItem extends ShieldItem implements FabricShield {
     @Override
     public boolean canRepair(ItemStack stack, ItemStack ingredient) {
         return stack.isOf(Items.NETHERITE_INGOT);
-    }
-
-    @Override
-    public int getCoolDownTicks() {
-        return 50;
-    }
-
-    @Override
-    public boolean supportsBanner() {
-        // Already have banner code handled
-        return false;
     }
 }
