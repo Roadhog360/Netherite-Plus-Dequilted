@@ -6,7 +6,6 @@
   "mixins": [
     "BlockItemMixin",
     "ItemPredicateMixin",
-    "PlayerEntityMixin",
     "ServerPlayNetworkHandlerMixin",
     "ShulkerBoxBlockEntityMixin",
     "TridentEntityMixin"
