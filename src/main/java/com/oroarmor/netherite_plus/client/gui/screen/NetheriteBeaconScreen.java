@@ -48,9 +48,9 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.BeaconScreenHandler;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerListener;
+import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -207,7 +207,7 @@ public class NetheriteBeaconScreen extends HandledScreen<NetheriteBeaconScreenHa
         private boolean disabled;
 
         protected BaseButtonWidget(int x, int y) {
-            super(x, y, 22, 22, Text.empty());
+            super(x, y, 22, 22, ScreenTexts.EMPTY);
         }
 
         protected BaseButtonWidget(int x, int y, Text text) {
@@ -222,7 +222,7 @@ public class NetheriteBeaconScreen extends HandledScreen<NetheriteBeaconScreenHa
                 uStart += width * 2;
             } else if (disabled) {
                 uStart += width;
-            } else if (isHovered() || isFocused()) {
+            } else if (isSelected()) {
                 uStart += width * 3;
             }
 
@@ -249,7 +249,7 @@ public class NetheriteBeaconScreen extends HandledScreen<NetheriteBeaconScreenHa
     @Environment(EnvType.CLIENT)
     class CancelButtonWidget extends IconButtonWidget {
         public CancelButtonWidget(int x, int y) {
-            super(x, y, 112, 220, Text.empty()); //REPLACE WITH CANCEL
+            super(x, y, 112, 220, ScreenTexts.CANCEL);
         }
 
         @Override
@@ -265,7 +265,7 @@ public class NetheriteBeaconScreen extends HandledScreen<NetheriteBeaconScreenHa
     @Environment(EnvType.CLIENT)
     class DoneButtonWidget extends IconButtonWidget {
         public DoneButtonWidget(int x, int y) {
-            super(x, y, 90, 220, Text.empty());
+            super(x, y, 90, 220, ScreenTexts.DONE);
         }
 
         @Override
