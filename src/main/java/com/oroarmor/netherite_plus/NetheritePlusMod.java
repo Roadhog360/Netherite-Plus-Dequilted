@@ -109,5 +109,8 @@ public class NetheritePlusMod implements ModInitializer {
             UniqueItemRegistry.BOW.addItemToRegistry(NETHERITE_BOW);
             UniqueItemRegistry.CROSSBOW.addItemToRegistry(NETHERITE_CROSSBOW);
         }
+        if(CONFIG.enabled.elytra.value()) {
+            UniqueItemRegistry.ELYTRA.addItemToRegistry(NETHERITE_ELYTRA);
+        }
     }
 }

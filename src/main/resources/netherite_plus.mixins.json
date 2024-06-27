@@ -7,8 +7,10 @@
     "BlockItemMixin",
     "BowItemMixin",
     "CrossbowItemMixin",
+    "EnchantmentHelperMixin",
     "ItemPredicateMixin",
     "PlayerEntityMixin",
+    "PlayerInventoryMixin",
     "ServerPlayNetworkHandlerMixin",
     "ShulkerBoxBlockEntityMixin",
     "TridentEntityMixin"

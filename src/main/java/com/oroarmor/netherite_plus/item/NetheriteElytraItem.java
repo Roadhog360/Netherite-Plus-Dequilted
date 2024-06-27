@@ -24,20 +24,67 @@
 
 package com.oroarmor.netherite_plus.item;
 
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.EnchantmentTarget;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.item.*;
 
 import net.fabricmc.fabric.api.entity.event.v1.FabricElytraItem;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 
-public class NetheriteElytraItem extends ArmorItem implements FabricElytraItem {
+import java.util.UUID;
+
+public class NetheriteElytraItem extends ElytraItem implements FabricElytraItem {
+
+    private final ArmorMaterial material;
+    private final int protection;
+    private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
     public NetheriteElytraItem(Settings settings) {
-        super(NetheriteElytraArmorMaterials.NETHERITE_ELYTRA_MATERIAL, ArmorItem.Type.CHESTPLATE, settings);
+        super(settings);
+        material = NetheriteElytraArmorMaterials.NETHERITE_ELYTRA_MATERIAL;
+        protection = material.getProtection(ArmorItem.Type.CHESTPLATE);
+        float toughness = material.getToughness();
+        float knockbackResistance = material.getKnockbackResistance();
+        if(protection > 0) {
+        ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
+            UUID uUID = UUID.fromString("9F3D476D-C118-4544-8365-64846904B48E");
+            builder.put(EntityAttributes.GENERIC_ARMOR, new EntityAttributeModifier(uUID, "Armor modifier", protection, EntityAttributeModifier.Operation.ADDITION));
+            builder.put(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, new EntityAttributeModifier(uUID, "Armor toughness", toughness, EntityAttributeModifier.Operation.ADDITION));
+            builder.put(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, new EntityAttributeModifier(uUID, "Armor knockback resistance", knockbackResistance, EntityAttributeModifier.Operation.ADDITION));
+            this.attributeModifiers = builder.build();
+        } else {
+            attributeModifiers = null;
+        }
     }
 
     @Override
-    public boolean canRepair(ItemStack stack, ItemStack ingredient) {
-        return ingredient.getItem() == Items.PHANTOM_MEMBRANE;
+    public SoundEvent getEquipSound() {
+        return SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE;
+    }
+
+    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
+        return slot == ArmorItem.Type.CHESTPLATE.getEquipmentSlot() && attributeModifiers != null
+                ? this.attributeModifiers : super.getAttributeModifiers(slot);
+    }
+
+    public int getEnchantability() {
+        return protection > 0 ? this.material.getEnchantability() : 0;
+    }
+
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return protection > 0;
     }
 }

@@ -52,7 +52,9 @@ dependencies {
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modImplementation "com.oroarmor:multi-item-lib:1.6.2"
+//     modImplementation "com.oroarmor:multi-item-lib:1.6.2" Temporary
+
+    modImplementation files('libs/multi-item-lib-1.6.3.jar')
 //     modImplementation "com.github.CrimsonDawn45:Fabric-Shield-Lib:v${project.fabric_shield_lib_version}"
 
     modRuntimeOnly("com.terraformersmc:modmenu:7.2.1")
