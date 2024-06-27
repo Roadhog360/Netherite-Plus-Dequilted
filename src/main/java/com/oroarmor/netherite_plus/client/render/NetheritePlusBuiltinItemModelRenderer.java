@@ -111,12 +111,12 @@ public class NetheritePlusBuiltinItemModelRenderer implements SynchronousResourc
         boolean bl = stack.getSubNbt("BlockEntityTag") != null;
         matrices.push();
         matrices.scale(1.0F, -1.0F, -1.0F);
-        SpriteIdentifier material = bl ? NetheritePlusTextures.NETHERITE_SHIELD_BASE : NetheritePlusTextures.NETHERITE_SHIELD_BASE_NO_PATTERN;
-        VertexConsumer vertexConsumer = material.getSprite().getTextureSpecificVertexConsumer(ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, model.getLayer(material.getTextureId()), true, stack.hasGlint()));
+        Identifier id = bl ? id("textures/entity/netherite_shield_base.png") : id("textures/entity/netherite_shield_base_nopattern.png");
+        VertexConsumer vertexConsumer = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, model.getLayer(id), true, stack.hasGlint());
         model.getHandle().render(matrices, vertexConsumer, light, overlay, 1.0F, 1.0F, 1.0F, 1.0F);
         if (bl) {
             List<Pair<RegistryEntry<BannerPattern>, DyeColor>> list = BannerBlockEntity.getPatternsFromNbt(ShieldItem.getColor(stack), BannerBlockEntity.getPatternListNbt(stack));
-            BannerBlockEntityRenderer.renderCanvas(matrices, vertexConsumers, light, overlay, model.getPlate(), material, false, list, stack.hasGlint());
+            BannerBlockEntityRenderer.renderCanvas(matrices, vertexConsumers, light, overlay, model.getPlate(), NetheritePlusTextures.NETHERITE_SHIELD_BASE, false, list, stack.hasGlint());
         } else {
             model.getPlate().render(matrices, vertexConsumer, light, overlay, 1.0F, 1.0F, 1.0F, 1.0F);
         }
