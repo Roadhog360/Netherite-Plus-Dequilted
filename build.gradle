@@ -1,5 +1,5 @@
 plugins {
-    id 'org.quiltmc.loom' version "1.1.+"
+    id 'org.quiltmc.loom' version "1.4.+"
 
     id 'com.oroarmor.general-gradle-plugin' version '1.2.3'
     id 'com.oroarmor.minecraft-gradle-plugin' version '1.2.3'
@@ -47,7 +47,7 @@ minecraftPublishing {
     curseforgeId = "394120"
     dependencies {
         "multi-item-lib" {
-            version = "1.6.2"
+            version = "1.6.3"
             type = DependencyType.REQUIRED
         }
     }
@@ -71,7 +71,10 @@ dependencies {
     modImplementation "org.quiltmc:qsl:${project.qsl_version}"
     modImplementation "org.quiltmc.quilted-fabric-api:quilted-fabric-api:${project.qfapi_version}"
 
-    modImplementation "com.oroarmor:multi-item-lib:1.6.2"
+//     modImplementation "com.oroarmor:multi-item-lib:1.6.2"
+//Temporary
+    modImplementation files('libs/multi-item-lib-1.6.3.jar')
+
     modCompileOnly("com.github.CrimsonDawn45:Fabric-Shield-Lib:1.7.2-1.20.2")
     modRuntimeOnly("com.terraformersmc:modmenu:7.2.1")
 }

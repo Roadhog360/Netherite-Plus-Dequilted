@@ -106,5 +106,8 @@ public class NetheritePlusMod implements ModInitializer {
         if (CONFIG.enabled.shears.value()) {
             UniqueItemRegistry.SHEARS.addItemToRegistry(NETHERITE_SHEARS);
         }
+        if (CONFIG.enabled.elytra.value()) {
+            UniqueItemRegistry.ELYTRA.addItemToRegistry(NETHERITE_ELYTRA);
+        }
     }
 }
