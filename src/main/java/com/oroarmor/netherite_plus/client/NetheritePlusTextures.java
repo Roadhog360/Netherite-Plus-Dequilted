@@ -34,10 +34,6 @@ public class NetheritePlusTextures {
     public static final Identifier NETHERITE_SHULKER_BOXES_ATLAS_TEXTURE = id("textures/atlas/netherite_shulker_boxes.png");
     public static final Identifier NETHERITE_SHIELD_PATTERNS_ATLAS_TEXTURE = id("textures/atlas/netherite_shield_patterns.png");
 
-    public static final Material NETHERITE_SHIELD_BASE = new Material(
-            NETHERITE_SHIELD_PATTERNS_ATLAS_TEXTURE, id("entity/netherite_shield_base")
-    );
-    public static final Material NETHERITE_SHIELD_BASE_NO_PATTERN = new Material(
-            NETHERITE_SHIELD_PATTERNS_ATLAS_TEXTURE, id("entity/netherite_shield_base_nopattern")
-    );
+    //Shields with patterns need an atlas, supposedly
+    public static final Material NETHERITE_SHIELD_BASE = new Material(NETHERITE_SHIELD_PATTERNS_ATLAS_TEXTURE, id("entity/netherite_shield_base"));
 }
