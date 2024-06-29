@@ -30,7 +30,6 @@ import java.util.Queue;
 import com.oroarmor.netherite_plus.NetheritePlusMod;
 import com.oroarmor.netherite_plus.block.NetheritePlusBlocks;
 import com.oroarmor.netherite_plus.client.render.NetheriteBeaconBlockEntityRenderer;
-import com.oroarmor.netherite_plus.client.render.NetheriteElytraFeatureRenderer;
 import com.oroarmor.netherite_plus.client.render.NetheritePlusBuiltinItemModelRenderer;
 import com.oroarmor.netherite_plus.client.render.NetheriteShulkerBoxBlockEntityRenderer;
 import com.oroarmor.netherite_plus.item.NetheritePlusItems;
@@ -39,26 +38,14 @@ import com.oroarmor.netherite_plus.screen.NetheritePlusScreenHandlers;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.model.loading.v1.FabricBakedModelManager;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
-import net.fabricmc.fabric.api.renderer.v1.model.FabricBakedModel;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.LivingEntityRenderer;
-import net.minecraft.client.render.entity.model.ArmorStandEntityModel;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.client.render.entity.model.PlayerEntityModel;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.resource.ResourceType;
 
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
+
 import static com.oroarmor.netherite_plus.NetheritePlusMod.id;
 
 public class NetheritePlusClientMod implements ClientModInitializer {
@@ -89,12 +76,6 @@ public class NetheritePlusClientMod implements ClientModInitializer {
         if (NetheritePlusMod.CONFIG.enabled.beacon.value()) {
             BlockRenderLayerMap.INSTANCE.putBlock(NetheritePlusBlocks.NETHERITE_BEACON, RenderLayer.getCutout());
         }
-
-        LivingEntityFeatureRendererRegistrationCallback.EVENT.register(((EntityType<? extends LivingEntity> entityType, LivingEntityRenderer<?, ?> entityRenderer, LivingEntityFeatureRendererRegistrationCallback.RegistrationHelper registrationHelper, EntityRendererFactory.Context context) -> {
-            if (entityRenderer.getModel() instanceof PlayerEntityModel || entityRenderer.getModel() instanceof BipedEntityModel || entityRenderer.getModel() instanceof ArmorStandEntityModel) {
-                registrationHelper.register(new NetheriteElytraFeatureRenderer<>(entityRenderer, context.getModelLoader()));
-            }
-        }));
     }
 
     public static void registerBuiltinItemRenderers(MinecraftClient client) {

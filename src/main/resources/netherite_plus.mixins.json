@@ -19,6 +19,7 @@
     "ClientPlayNetworkHandlerAccessor",
     "ClientPlayNetworkHandlerMixin",
     "render.BackgroundRendererMixin",
+    "render.ElytraFeatureRendererMixin",
     "render.ItemRendererAccessor",
     "render.ItemRendererMixin",
     "render.MinecraftClientMixin",

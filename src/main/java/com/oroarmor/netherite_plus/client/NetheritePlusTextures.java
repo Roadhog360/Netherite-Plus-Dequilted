@@ -25,7 +25,6 @@
 package com.oroarmor.netherite_plus.client;
 
 
-import net.minecraft.client.resource.ResourceIndex;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.util.Identifier;
 
@@ -34,6 +33,10 @@ import static com.oroarmor.netherite_plus.NetheritePlusMod.id;
 public class NetheritePlusTextures {
     public static final Identifier NETHERITE_SHULKER_BOXES_ATLAS_TEXTURE = id("textures/atlas/netherite_shulker_boxes.png");
     public static final Identifier NETHERITE_SHIELD_PATTERNS_ATLAS_TEXTURE = id("textures/atlas/netherite_shield_patterns.png");
+    public static final Identifier NETHERITE_ELYTRA_SKIN = id("textures/entity/netherite_elytra.png");
+    public static final Identifier NETHERITE_SHIELD_TEXTURE = id("textures/entity/netherite_shield_base.png");
+    public static final Identifier NETHERITE_SHIELD_TEXTURE_NOPATTERN = id("textures/entity/netherite_shield_base_nopattern.png");
+    public static final Identifier NETHERITE_TRIDENT_TEXTURE = id("textures/entity/netherite_trident.png");
 
     //Netherite shield with patterns
     public static final SpriteIdentifier NETHERITE_SHIELD_BASE = new SpriteIdentifier(NETHERITE_SHIELD_PATTERNS_ATLAS_TEXTURE, id("entity/netherite_shield_base")

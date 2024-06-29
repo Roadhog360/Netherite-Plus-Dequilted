@@ -34,9 +34,7 @@ import com.oroarmor.netherite_plus.block.NetheriteShulkerBoxBlock;
 import com.oroarmor.netherite_plus.block.entity.NetheriteShulkerBoxBlockEntity;
 import com.oroarmor.netherite_plus.client.NetheritePlusTextures;
 import com.oroarmor.netherite_plus.item.NetheritePlusItems;
-import net.minecraft.client.model.Model;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 
 import net.minecraft.block.entity.BannerBlockEntity;
 import net.minecraft.block.entity.BannerPattern;
@@ -49,7 +47,6 @@ import net.minecraft.client.render.entity.model.ShieldEntityModel;
 import net.minecraft.client.render.entity.model.TridentEntityModel;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
-import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
@@ -60,9 +57,6 @@ import net.minecraft.resource.SynchronousResourceReloader;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.event.listener.GameEventListener;
-
-import static com.oroarmor.netherite_plus.NetheritePlusMod.id;
 
 public class NetheritePlusBuiltinItemModelRenderer implements SynchronousResourceReloader {
 
@@ -111,7 +105,7 @@ public class NetheritePlusBuiltinItemModelRenderer implements SynchronousResourc
         boolean bl = stack.getSubNbt("BlockEntityTag") != null;
         matrices.push();
         matrices.scale(1.0F, -1.0F, -1.0F);
-        Identifier id = bl ? id("textures/entity/netherite_shield_base.png") : id("textures/entity/netherite_shield_base_nopattern.png");
+        Identifier id = bl ? NetheritePlusTextures.NETHERITE_SHIELD_TEXTURE : NetheritePlusTextures.NETHERITE_SHIELD_TEXTURE_NOPATTERN;
         VertexConsumer vertexConsumer = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, model.getLayer(id), true, stack.hasGlint());
         model.getHandle().render(matrices, vertexConsumer, light, overlay, 1.0F, 1.0F, 1.0F, 1.0F);
         if (bl) {
@@ -127,7 +121,7 @@ public class NetheritePlusBuiltinItemModelRenderer implements SynchronousResourc
     public static void renderTrident(TridentEntityModel model, ItemStack stack, ModelTransformationMode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         matrices.push();
         matrices.scale(1.0F, -1.0F, -1.0F);
-        VertexConsumer vertexConsumer2 = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, model.getLayer(id("textures/entity/netherite_trident.png")), false, stack.hasGlint());
+        VertexConsumer vertexConsumer2 = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, model.getLayer(NetheritePlusTextures.NETHERITE_TRIDENT_TEXTURE), false, stack.hasGlint());
         model.render(matrices, vertexConsumer2, light, overlay, 1.0F, 1.0F, 1.0F, 1.0F);
         matrices.pop();
     }
