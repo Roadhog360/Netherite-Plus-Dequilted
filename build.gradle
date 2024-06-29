@@ -71,9 +71,7 @@ dependencies {
     modImplementation "org.quiltmc:qsl:${project.qsl_version}"
     modImplementation "org.quiltmc.quilted-fabric-api:quilted-fabric-api:${project.qfapi_version}"
 
-//     modImplementation "com.oroarmor:multi-item-lib:1.6.2"
-//Temporary
-    modImplementation files('libs/multi-item-lib-1.6.3.jar')
+    modImplementation "com.oroarmor:multi-item-lib:1.7.0"
 
     modCompileOnly("com.github.CrimsonDawn45:Fabric-Shield-Lib:1.7.2-1.20.2")
     modRuntimeOnly("com.terraformersmc:modmenu:7.2.1")
