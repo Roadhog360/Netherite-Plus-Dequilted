@@ -24,18 +24,19 @@
 
 package com.oroarmor.netherite_plus.client;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 import com.oroarmor.netherite_plus.NetheritePlusMod;
 import com.oroarmor.netherite_plus.block.NetheritePlusBlocks;
 import com.oroarmor.netherite_plus.client.render.NetheriteBeaconBlockEntityRenderer;
-import com.oroarmor.netherite_plus.client.render.NetheriteElytraFeatureRenderer;
 import com.oroarmor.netherite_plus.client.render.NetheritePlusBuiltinItemModelRenderer;
 import com.oroarmor.netherite_plus.client.render.NetheriteShulkerBoxBlockEntityRenderer;
 import com.oroarmor.netherite_plus.item.NetheritePlusItems;
 import com.oroarmor.netherite_plus.network.LavaVisionUpdatePacket;
 import com.oroarmor.netherite_plus.screen.NetheritePlusScreenHandlers;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.resource.ResourceType;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
 import org.quiltmc.qsl.block.extensions.api.client.BlockRenderLayerMap;
@@ -43,20 +44,9 @@ import org.quiltmc.qsl.networking.api.client.ClientPlayConnectionEvents;
 import org.quiltmc.qsl.networking.api.client.ClientPlayNetworking;
 import org.quiltmc.qsl.resource.loader.api.ResourceLoader;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.LivingEntityRenderer;
-import net.minecraft.client.render.entity.model.ArmorStandEntityModel;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.client.render.entity.model.PlayerEntityModel;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.resource.ResourceType;
+import java.util.LinkedList;
+import java.util.Queue;
 
-import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
 import static com.oroarmor.netherite_plus.NetheritePlusMod.id;
 
 public class NetheritePlusClientMod implements ClientModInitializer {
@@ -87,12 +77,6 @@ public class NetheritePlusClientMod implements ClientModInitializer {
         if (NetheritePlusMod.CONFIG.enabled.beacon.value()) {
             BlockRenderLayerMap.put(RenderLayer.getCutout(), NetheritePlusBlocks.NETHERITE_BEACON);
         }
-
-        LivingEntityFeatureRendererRegistrationCallback.EVENT.register(((EntityType<? extends LivingEntity> entityType, LivingEntityRenderer<?, ?> entityRenderer, LivingEntityFeatureRendererRegistrationCallback.RegistrationHelper registrationHelper, EntityRendererFactory.Context context) -> {
-            if (entityRenderer.getModel() instanceof PlayerEntityModel || entityRenderer.getModel() instanceof BipedEntityModel || entityRenderer.getModel() instanceof ArmorStandEntityModel) {
-                registrationHelper.register(new NetheriteElytraFeatureRenderer<>(entityRenderer, context.getModelLoader()));
-            }
-        }));
     }
 
     public static void registerBuiltinItemRenderers(MinecraftClient client) {

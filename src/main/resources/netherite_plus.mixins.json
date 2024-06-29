@@ -16,6 +16,7 @@
   "client": [
     "ClientPlayNetworkHandlerAccessor",
     "ClientPlayNetworkHandlerMixin",
+    "render.ElytraFeatureRendererMixin",
     "render.BackgroundRendererMixin",
     "render.ItemRendererAccessor",
     "render.ItemRendererMixin",
